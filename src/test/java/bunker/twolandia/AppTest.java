@@ -1,4 +1,4 @@
-package bunker.game;
+package bunker.twolandia;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

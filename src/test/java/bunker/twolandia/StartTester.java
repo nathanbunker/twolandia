@@ -1,4 +1,4 @@
-package bunker.game;
+package bunker.twolandia;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
