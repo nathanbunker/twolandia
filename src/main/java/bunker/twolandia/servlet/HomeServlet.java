@@ -49,12 +49,12 @@ public class HomeServlet extends HttpServlet {
 
     out.println("<html>");
     out.println("  <head>");
-    out.println("   <title>Game</title>");
+    out.println("   <title>Twolandia</title>");
     out.println("   <script src=\"processing.js\"></script>");
     out.println("  </head>");
     out.println("  <body>");
     if (player.getName().equals("")) {
-      out.println("    <h1>Game</h1>");
+      out.println("    <h1>Welcome to Twolandia</h1>");
     } else {
       out.println("    <h1>Hello " + player.getName() + "</h1>");
     }
