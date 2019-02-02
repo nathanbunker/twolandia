@@ -6,7 +6,7 @@
 
   <servlet>
     <servlet-name>HomeServlet</servlet-name>
-    <servlet-class>bunker.game.servlet.HomeServlet</servlet-class>
+    <servlet-class>bunker.twolandia.servlet.HomeServlet</servlet-class>
   </servlet>
   <servlet-mapping>
   <servlet-name>HomeServlet</servlet-name>
