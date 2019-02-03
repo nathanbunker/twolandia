@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import bunker.twolandia.logic.GameFactory;
+import bunker.twolandia.model.Game;
 import bunker.twolandia.model.Player;
 
 public class HomeServlet extends HttpServlet {
 
+  private static final String PARAM_GAME_NAME = "gameName";
   private static final String PARAM_PLAYER_NAME = "playerName";
   private static final String PARAM_ACTION = "action";
 
@@ -32,6 +35,11 @@ public class HomeServlet extends HttpServlet {
       count = count + 1;
     }
     session.setAttribute("count", count);
+    String gameName = GameFactory.KAHN_ORIGINAL;
+    if (req.getParameter(PARAM_GAME_NAME) != null) {
+      gameName = req.getParameter(PARAM_GAME_NAME);
+    }
+    Game game = GameFactory.getGame(gameName);
 
     Player player = (Player) session.getAttribute("player");
     if (player == null) {
@@ -54,15 +62,13 @@ public class HomeServlet extends HttpServlet {
     out.println("  <body>");
     out.println("    <canvas id=\"canvas1\"></canvas>");
     out.println("    <script>");
-    out.println("      var circleWidth = 10; ");
-    out.println("      var factor = 1; ");
     out.println("      function sketchProc(processing) { ");
     out.println("        processing.setup = function() { ");
-    out.println("          processing.size(400, 400);");
+    out.println("          processing.size(" + game.getWidth() + ", " + game.getHeight() + ");");
     out.println("        }");
     out.println("        processing.draw = function() { ");
     InputStreamReader reader =
-        new InputStreamReader(this.getClass().getResourceAsStream("program.js"));
+        new InputStreamReader(this.getClass().getResourceAsStream(game.getName() + ".js"));
     BufferedReader buf = new BufferedReader(reader);
     String line;
     while ((line = buf.readLine()) != null) {
@@ -73,6 +79,12 @@ public class HomeServlet extends HttpServlet {
     out.println("      var canvas = document.getElementById(\"canvas1\"); ");
     out.println("      var processingInstance = new Processing(canvas, sketchProc) ");
     out.println("    </script>");
+    String link = "home?" + PARAM_GAME_NAME + "=";
+    out.println("    <ul>");
+    out.println(
+        "      <li><a href=\"" + link + GameFactory.KAHN_ORIGINAL + "\">Kahn Original</a></li>");
+    out.println("      <li><a href=\"" + link + GameFactory.MINE + "\">Mine</a></li>");
+    out.println("    <ul>");
     out.println("  </body>");
     out.println("</html>");
 

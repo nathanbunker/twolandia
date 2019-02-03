@@ -672,6 +672,8 @@ var intohouse = function() {
 };
 
 processing.keyPressed = function() {
+	
+	
 	processing.keyIsPressed = true;
 }
 
