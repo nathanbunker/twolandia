@@ -31,6 +31,16 @@ const BLOCK_GRASS = 6;
 const BLOCK_COAL = 7;
 const BLOCK_IRON = 8;
 const BLOCK_DIAMOND = 9;
+const BLOCK_SNOW = 10;
+const BLOCK_ICE = 11;
+const BLOCK_WOOD = 12;
+const BLOCK_LEAVES = 13;
+// const BLOCK_ = 14;
+//const BLOCK_ = 15;
+const BLOCK_AMETHYST = 16;
+const BLOCK_FLAMES = 17;
+const BLOCK_FISH = 18;
+
 
 var drawBlock = function(blockId, x, y) {
 	switch (blockId) {
@@ -93,6 +103,17 @@ var drawBlock = function(blockId, x, y) {
 		processing.rect(x * 12, y * 12, 11, 11);
 		processing.rect(x * 12 + 3, y * 12 + 3, 5, 5);
 		break;
+	case BLOCK_SNOW:
+	case BLOCK_ICE:
+		processing.noStroke();
+		processing.fill(255, 255, 255);
+		processing.rect(x * 12, y * 12, 12, 12);
+		break;
+	case BLOCK_WOOD:
+	case BLOCK_LEAVES:
+	case BLOCK_AMETHYST:
+	case BLOCK_FLAMES:
+	case BLOCK_FISH:
 	default:
 		processing.stroke(157, 157, 157);
 		processing.fill(166, 166, 166); 
