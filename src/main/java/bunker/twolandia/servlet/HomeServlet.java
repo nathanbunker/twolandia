@@ -46,36 +46,12 @@ public class HomeServlet extends HttpServlet {
       }
     }
 
-
     out.println("<html>");
     out.println("  <head>");
     out.println("   <title>Twolandia</title>");
     out.println("   <script src=\"processing.js\"></script>");
     out.println("  </head>");
     out.println("  <body>");
-    if (player.getName().equals("")) {
-      out.println("    <h1>Welcome to Twolandia</h1>");
-    } else {
-      out.println("    <h1>Hello " + player.getName() + "</h1>");
-    }
-    out.println("    <p>You have been here " + count + " time" + (count == 1 ? "" : "s"));
-    out.println("    <form action=\"home\" method=\"GET\">");
-    out.println("      <input type=\"text\" name=\"" + PARAM_PLAYER_NAME + "\" value=\""
-        + player.getName() + "\"/>");
-    out.println("      <input type=\"submit\" name=\"" + PARAM_ACTION + "\" value=\"" + ACTION_SAVE
-        + "\"/>");
-    out.println("    </form>");
-
-    int sizeOfEyes = 4 + (count % 5);
-
-    out.println("    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"200\" height=\"200\">\r\n"
-        + "     <circle r=\"100\" cy=\"100\" cx=\"100\" fill=\"#FCFCFC\"/>\r\n"
-        + "     <circle r=\"20\" cy=\"80\" cx=\"70\" fill=\"#ffffff\"/>\r\n"
-        + "     <circle r=\"20\" cy=\"80\" cx=\"130\" fill=\"#ffffff\"/>\r\n" + "     <circle r=\""
-        + sizeOfEyes + "\" cy=\"80\" cx=\"70\" fill=\"#000000\"/>\r\n" + "     <circle r=\""
-        + sizeOfEyes + "\" cy=\"80\" cx=\"130\" fill=\"#000000\"/>\r\n" + "    </svg>\r\n" + "");
-
-    out.println("    <h1>Processing JS</h1>");
     out.println("    <canvas id=\"canvas1\"></canvas>");
     out.println("    <script>");
     out.println("      var circleWidth = 10; ");
