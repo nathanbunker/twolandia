@@ -5,6 +5,7 @@ import bunker.twolandia.model.Game;
 public class GameFactory {
   public static final String KAHN_ORIGINAL = "program";
   public static final String MINE = "mine";
+  public static final String MINE_FROSTY = "mineFrosty";
 
   public static Game getGame(String name) {
     Game game = null;
@@ -16,12 +17,20 @@ public class GameFactory {
       game.setHeight(400);
     } else if (name.equals(MINE)) {
       game = new Game();
-      game.setDescription("Mine");
+      game.setDescription("Mine - Original");
       game.setName(MINE);
       game.setWidth(1200);
       game.setHeight(600);
       game.setHasData(true);
       game.setWorld("original");
+    } else if (name.equals(MINE_FROSTY)) {
+      game = new Game();
+      game.setDescription("Mine - Frosty");
+      game.setName(MINE);
+      game.setWidth(1200);
+      game.setHeight(600);
+      game.setHasData(true);
+      game.setWorld("frosty");
     }
     return game;
   }
