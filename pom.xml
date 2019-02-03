@@ -6,7 +6,7 @@
 	<groupId>bunker</groupId>
 	<artifactId>twolandia</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>game</name>
 	<url>http://maven.apache.org</url>
@@ -47,4 +47,8 @@
 		</dependency>
 
 	</dependencies>
+	
+	<build>
+	  <finalName>twolandia</finalName>
+	</build>
 </project>
