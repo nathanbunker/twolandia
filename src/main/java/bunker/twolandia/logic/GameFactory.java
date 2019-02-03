@@ -20,6 +20,8 @@ public class GameFactory {
       game.setName(MINE);
       game.setWidth(1200);
       game.setHeight(600);
+      game.setHasData(true);
+      game.setWorld("original");
     }
     return game;
   }

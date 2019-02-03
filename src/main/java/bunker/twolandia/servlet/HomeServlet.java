@@ -67,13 +67,10 @@ public class HomeServlet extends HttpServlet {
     out.println("          processing.size(" + game.getWidth() + ", " + game.getHeight() + ");");
     out.println("        }");
     out.println("        processing.draw = function() { ");
-    InputStreamReader reader =
-        new InputStreamReader(this.getClass().getResourceAsStream(game.getName() + ".js"));
-    BufferedReader buf = new BufferedReader(reader);
-    String line;
-    while ((line = buf.readLine()) != null) {
-      out.println(line);
+    if (game.isHasData()) {
+      inlineJavascript(out, game.getName() + "-" + game.getWorld());
     }
+    inlineJavascript(out, game.getName());
     out.println("        }");
     out.println("      }");
     out.println("      var canvas = document.getElementById(\"canvas1\"); ");
@@ -89,5 +86,15 @@ public class HomeServlet extends HttpServlet {
     out.println("</html>");
 
     out.close();
+  }
+
+  private void inlineJavascript(PrintWriter out, String s) throws IOException {
+    InputStreamReader reader =
+        new InputStreamReader(this.getClass().getResourceAsStream(s + ".js"));
+    BufferedReader buf = new BufferedReader(reader);
+    String line;
+    while ((line = buf.readLine()) != null) {
+      out.println(line);
+    }
   }
 }

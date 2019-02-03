@@ -5,6 +5,21 @@ public class Game {
   private String description = "";
   private int height = 400;
   private int width = 400;
+  private boolean hasData = false; 
+  private String world = "";
+  
+  public String getWorld() {
+    return world;
+  }
+  public void setWorld(String world) {
+    this.world = world;
+  }
+  public boolean isHasData() {
+    return hasData;
+  }
+  public void setHasData(boolean hasData) {
+    this.hasData = hasData;
+  }
   public String getName() {
     return name;
   }
