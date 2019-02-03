@@ -5,7 +5,8 @@ var player = {
 	lookingDown : 0,
 	rest : 0,
 	jump : 0,
-	starting : true
+	starting : true,
+	holdingBlock : 0
 };
 
 var messageToPlayer = {
@@ -20,59 +21,89 @@ var drawMessage = function() {
 	}
 }
 
+const BLOCK_AIR = 0;
+const BLOCK_STONE = 1;
+const BLOCK_DIRT = 2;
+const BLOCK_CAVE_AIR = 3;
+const BLOCK_SAND = 4;
+const BLOCK_WATER = 5;
+const BLOCK_GRASS = 6;
+const BLOCK_COAL = 7;
+const BLOCK_IRON = 8;
+const BLOCK_DIAMOND = 9;
+
+var drawBlock = function(blockId, x, y) {
+	switch (blockId) {
+	case BLOCK_AIR:
+		processing.noStroke();
+		processing.fill(102, 255, 255);
+		processing.rect(x * 12, y * 12, 12, 12);
+		break;
+	case BLOCK_STONE:
+		processing.stroke(157, 157, 157);
+		processing.fill(166, 166, 166); // 
+		processing.rect(x * 12, y * 12, 11, 11);
+		break;
+	case BLOCK_DIRT:
+		processing.noStroke();
+		processing.fill(153, 102, 51);
+		processing.rect(x * 12, y * 12, 12, 12);
+		processing.fill(150, 100, 0);
+		processing.ellipse(x * 12 + 5, y * 12 + 5, 5, 5);
+		break;
+	case BLOCK_CAVE_AIR:
+		processing.noStroke();
+		processing.fill(242, 242, 242);
+		processing.rect(x * 12, y * 12, 11, 11);
+		break;
+	case BLOCK_SAND:
+		processing.stroke(200, 200, 140);
+		processing.fill(255, 255, 153);
+		processing.rect(x * 12, y * 12, 11, 11);
+		break;
+	case BLOCK_WATER:
+		processing.noStroke();
+		processing.fill(102, 204, 255);
+		processing.rect(x * 12, y * 12, 12, 12);
+		break;
+	case BLOCK_GRASS:
+		processing.noStroke();
+		processing.fill(51, 204, 51);
+		processing.rect(x * 12, y * 12, 12, 12);
+		break;
+	case BLOCK_COAL:
+		processing.noStroke();
+		processing.fill(115, 115, 115);
+		processing.rect(x * 12, y * 12, 12, 12);
+		processing.fill(89, 89, 89);
+		processing.rect(x * 12 + 9, y * 12 + 9, 3, 3);
+		processing.rect(x * 12, y * 12, 3, 3);
+		break;
+	case BLOCK_IRON:
+		processing.stroke(0, 0, 0);
+		processing.fill(255, 145, 0);
+		processing.stroke(255, 135, 0);
+		processing.rect(x * 12, y * 12, 11, 11);
+		processing.rect(x * 12 + 3, y * 12 + 3, 5, 5);
+		break;
+	case BLOCK_DIAMOND:
+		processing.stroke(0, 0, 0);
+		processing.fill(51, 204, 255);
+		processing.stroke(0, 0, 0);
+		processing.rect(x * 12, y * 12, 11, 11);
+		processing.rect(x * 12 + 3, y * 12 + 3, 5, 5);
+		break;
+	default:
+		processing.stroke(157, 157, 157);
+		processing.fill(166, 166, 166); 
+		processing.rect(x * 12, y * 12, 11, 11);
+	}
+
+}
 var drawField = function() {
 	for (y in field) {
 		for (x in field[y]) {
-			if (field[y][x] == 0) { // sky/air
-				processing.noStroke();
-				processing.fill(102, 255, 255); // light blue
-				processing.rect(x * 12, y * 12, 12, 12);
-			} else if (field[y][x] == 1) { // stone
-				processing.stroke(157, 157, 157);
-				processing.fill(166, 166, 166); // 
-				processing.rect(x * 12, y * 12, 11, 11);
-			} else if (field[y][x] == 2) { // dirt
-				processing.noStroke();
-				processing.fill(153, 102, 51);
-				processing.rect(x * 12, y * 12, 12, 12);
-				processing.fill(150, 100, 0);
-				processing.ellipse(x * 12 + 5, y * 12 + 5, 5, 5);
-			} else if (field[y][x] == 3) { // cloud
-				processing.stroke(255, 255, 255);
-				processing.fill(255, 255, 255);
-				processing.rect(x * 12, y * 12, 11, 11);
-			} else if (field[y][x] == 4) { // sand
-				processing.stroke(200, 200, 140);
-				processing.fill(255, 255, 153);
-				processing.rect(x * 12, y * 12, 11, 11);
-			} else if (field[y][x] == 5) { // water
-				processing.noStroke();
-				processing.fill(102, 204, 255);
-				processing.rect(x * 12, y * 12, 12, 12);
-			} else if (field[y][x] == 6) { // grass
-				processing.noStroke();
-				processing.fill(51, 204, 51);
-				processing.rect(x * 12, y * 12, 12, 12);
-			} else if (field[y][x] == 7) { // coal
-				processing.noStroke();
-				processing.fill(115, 115, 115);
-				processing.rect(x * 12, y * 12, 12, 12);
-				processing.fill(89, 89, 89);
-				processing.rect(x * 12 + 9, y * 12 + 9, 3, 3);
-				processing.rect(x * 12, y * 12, 3, 3);
-			} else if (field[y][x] == 8) { // iron
-				processing.stroke(0, 0, 0);
-				processing.fill(255, 145, 0);
-				processing.stroke(255, 135, 0);
-				processing.rect(x * 12, y * 12, 11, 11);
-				processing.rect(x * 12 + 3, y * 12 + 3, 5, 5);
-			} else if (field[y][x] == 9) { // diamond
-				processing.stroke(0, 0, 0);
-				processing.fill(51, 204, 255);
-				processing.stroke(0, 0, 0);
-				processing.rect(x * 12, y * 12, 11, 11);
-				processing.rect(x * 12 + 3, y * 12 + 3, 5, 5);
-			}
+			drawBlock(field[y][x], x, y);
 		}
 	}
 }
@@ -89,8 +120,15 @@ var drawPlayer = function(p) {
 	processing.fill(235, 202, 132); // tan (skin color)
 	processing.rect(p.x, p.y - 2, 6, 5); // head
 	// arms
-	processing.rect(p.x - 1, p.y + 2, 1, 6); // left arm
-	processing.rect(p.x + 6, p.y + 2, 1, 6); // right arm
+	if (p.holdingBlock == 0) {
+		processing.rect(p.x - 1, p.y + 2, 1, 6); // left arm
+		processing.rect(p.x + 6, p.y + 2, 1, 6); // right arm
+	} else {
+		processing.rect(p.x, p.y - 6, 0, 8); // left arm
+		processing.rect(p.x + 6, p.y - 6, 0, 8); // right arm
+		drawBlock(p.holdingBlock, (p.x - 3) / 12, (p.y - 18) / 12);
+	}
+
 	// fall in pond
 	processing.fill(0, 0, 0);
 	if (p.rest > 0) {
@@ -130,7 +168,8 @@ var fallPlayer = function(p) {
 	var fieldX = Math.floor(p.x / 12);
 	var fieldY = Math.floor((p.y + 11) / 12);
 	var fieldXr = Math.floor((p.x + 6) / 12);
-	if (field[fieldY][fieldX] == 0 && field[fieldY][fieldXr] == 0) {
+	if ((field[fieldY][fieldX] == BLOCK_AIR && field[fieldY][fieldXr] == BLOCK_AIR)
+			|| (field[fieldY][fieldX] == BLOCK_CAVE_AIR && field[fieldY][fieldXr] == BLOCK_CAVE_AIR)) {
 		// we are standing on the sky!
 		// move down by one
 		if (p.jump > 0) {
@@ -145,7 +184,8 @@ var fallPlayer = function(p) {
 		} else {
 			p.y += 3;
 		}
-	} else if (field[fieldY][fieldX] == 5 && field[fieldY][fieldXr] == 5) {
+	} else if (field[fieldY][fieldX] == BLOCK_WATER
+			&& field[fieldY][fieldXr] == BLOCK_WATER) {
 		// we are in the water, now you should sink
 		// move down by one
 		p.x += player.lookingRight * 2;
@@ -170,6 +210,52 @@ var fallPlayer = function(p) {
 	}
 }
 
+var playerDigs = function(p) {
+	var fieldX = Math.floor(p.x / 12);
+	var fieldY = Math.floor(p.y / 12);
+	if (player.lookingRight > 0) {
+		fieldX++;
+	} else if (player.lookingRight < 0) {
+		fieldX--;
+	} else {
+		if (player.holdingBlock == 0) {
+			fieldY++;
+		}
+		else {
+			fieldY--;
+		}
+	}
+	var blockId = field[fieldY][fieldX];
+	if (player.holdingBlock == 0) {
+		if (blockId == BLOCK_AIR || blockId == BLOCK_CAVE_AIR) {
+			// ignore dig command
+		}
+		else {
+			player.holdingBlock = field[fieldY][fieldX];
+			var leftSideBlock =field[fieldY][fieldX - 1]; 
+			var rightSideBlock =field[fieldY][fieldX + 1]; 
+			var topSideBlock = field[fieldY - 1][fieldX];
+			if (leftSideBlock == BLOCK_WATER || rightSideBlock == BLOCK_WATER || topSideBlock == BLOCK_WATER) {
+				field[fieldY][fieldX] = BLOCK_WATER;
+			} else if (leftSideBlock == BLOCK_CAVE_AIR || rightSideBlock == BLOCK_CAVE_AIR || topSideBlock == BLOCK_CAVE_AIR) {
+				field[fieldY][fieldX] = BLOCK_CAVE_AIR;
+			}
+			else {
+				field[fieldY][fieldX] = BLOCK_AIR;
+			}
+		}
+	}
+	else {
+		if (blockId == BLOCK_AIR || blockId == BLOCK_CAVE_AIR || blockId == BLOCK_WATER) {
+			field[fieldY][fieldX] = player.holdingBlock;
+			player.holdingBlock = 0;
+		}
+		else {
+			// ignore dig command
+		}
+	}
+};
+
 processing.keyPressed = function() {
 	movePlayer();
 	if (processing.keyCode === processing.RIGHT) {
@@ -188,6 +274,8 @@ processing.keyPressed = function() {
 		player.lookingRight = 0;
 		player.lookingDown = 1;
 		player.rest = 4 * 60;
+	} else if (processing.keyCode == processing.CONTROL) {
+		playerDigs(player);
 	}
 }
 
