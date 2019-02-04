@@ -81,12 +81,13 @@ var drawBlock = function(blockId, x, y) {
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
 		break;
 	case BLOCK_COAL:
-		processing.noStroke();
+		processing.stroke(89, 89, 89);
 		processing.fill(115, 115, 115);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-		processing.fill(89, 89, 89);
-		processing.rect(x * BLOCK_SIZE + 9, y * BLOCK_SIZE + 9, 3, 3);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 3, 3);
+		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+		processing.stroke(89, 89, 89);
+		//processing.rect(x * BLOCK_SIZE + 9, y * BLOCK_SIZE + 9, 3, 3);
+		//processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 3, 3);
+		processing.rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
 		break;
 	case BLOCK_IRON:
 		processing.stroke(0, 0, 0);
