@@ -46,7 +46,7 @@ const BLOCK_FLAMES = 17;
 var drawBlock = function(blockId, x, y) {
 	switch (blockId) {
 	case BLOCK_AIR:
-		processing.noStroke();
+		processing.stroke(72, 255, 255);
 		processing.fill(102, 255, 255);
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
 		break;
@@ -131,7 +131,7 @@ var drawBlock = function(blockId, x, y) {
 		break;
 	case BLOCK_LEAVES:
 		processing.stroke(0, 102, 0);
-		processing.fill(0, 153, 51); // 
+		processing.fill(0, 153, 51);
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
 		break;
 	case BLOCK_AMETHYST:
@@ -141,11 +141,11 @@ var drawBlock = function(blockId, x, y) {
 		processing.rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
 		break;
 	case BLOCK_FLAMES:
-		processing.noStroke();
+		processing.stroke(255, 204, 0);
 		processing.fill(255, 102, 0);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-		processing.fill(255, 204, 0);
-		processing.ellipse(x * BLOCK_SIZE + 5, y * BLOCK_SIZE + 5, 5, 5);
+		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+		processing.rect(x * BLOCK_SIZE + 9, y * BLOCK_SIZE + 9, 3, 3);
+		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 3, 3);
 		break;
 	default:
 		processing.stroke(0, 0, 0);
