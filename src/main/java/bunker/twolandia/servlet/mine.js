@@ -56,11 +56,9 @@ var drawBlock = function(blockId, x, y) {
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
 		break;
 	case BLOCK_DIRT:
-		processing.noStroke();
-		processing.fill(153, 102, 51);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-		processing.fill(150, 100, 0);
-		processing.ellipse(x * BLOCK_SIZE + 5, y * BLOCK_SIZE + 5, 5, 5);
+		processing.stroke(118, 54, 0);
+		processing.fill(128, 64, 0);
+		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
 		break;
 	case BLOCK_CAVE_AIR:
 		processing.noStroke();
@@ -78,9 +76,9 @@ var drawBlock = function(blockId, x, y) {
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
 		break;
 	case BLOCK_GRASS:
-		processing.noStroke();
+		processing.stroke(0, 153, 51);
 		processing.fill(51, 204, 51);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
 		break;
 	case BLOCK_COAL:
 		processing.noStroke();
@@ -130,11 +128,10 @@ var drawBlock = function(blockId, x, y) {
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
 		break;
 	case BLOCK_AMETHYST:
-		processing.noStroke();
 		processing.fill(204, 0, 204);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-		processing.fill(255, 255, 255);
-		processing.rect(x * BLOCK_SIZE + 1, y * BLOCK_SIZE + 2, 9, 1);
+		processing.stroke(0, 0, 0);
+		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
+		processing.rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
 		break;
 	case BLOCK_FLAMES:
 		processing.noStroke();
