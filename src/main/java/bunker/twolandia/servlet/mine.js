@@ -97,9 +97,8 @@ var drawBlock = function(blockId, x, y) {
 		processing.rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
 		break;
 	case BLOCK_IRON:
-		processing.stroke(0, 0, 0);
 		processing.fill(255, 145, 0);
-		processing.stroke(255, 135, 0);
+		processing.stroke(255, 115, 51);
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
 		processing.rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
 		break;
