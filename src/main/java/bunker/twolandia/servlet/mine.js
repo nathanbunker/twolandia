@@ -104,15 +104,44 @@ var drawBlock = function(blockId, x, y) {
 		processing.rect(x * 12 + 3, y * 12 + 3, 5, 5);
 		break;
 	case BLOCK_SNOW:
-	case BLOCK_ICE:
 		processing.noStroke();
 		processing.fill(255, 255, 255);
 		processing.rect(x * 12, y * 12, 12, 12);
 		break;
+	case BLOCK_ICE:
+		processing.noStroke();
+		processing.fill(0, 153, 255);
+		processing.rect(x * 12, y * 12, 12, 12);
+		processing.fill(255, 255, 255);
+		processing.rect(x * 12 + 1, y * 12 + 2, 9, 1);
+		break;
 	case BLOCK_WOOD:
+		processing.noStroke();
+		processing.fill(77, 38, 0);
+		processing.rect(x * 12, y * 12, 12, 12);
+		processing.fill(0, 0, 0);
+		processing.rect(x * 12 + 9, y * 12 + 9, 3, 3);
+		processing.rect(x * 12, y * 12, 3, 3);
+		break;
 	case BLOCK_LEAVES:
+		processing.stroke(0, 102, 0);
+		processing.fill(0, 153, 51); // 
+		processing.rect(x * 12, y * 12, 11, 11);
+		break;
 	case BLOCK_AMETHYST:
+		processing.noStroke();
+		processing.fill(204, 0, 204);
+		processing.rect(x * 12, y * 12, 12, 12);
+		processing.fill(255, 255, 255);
+		processing.rect(x * 12 + 1, y * 12 + 2, 9, 1);
+		break;
 	case BLOCK_FLAMES:
+		processing.noStroke();
+		processing.fill(255, 102, 0);
+		processing.rect(x * 12, y * 12, 12, 12);
+		processing.fill(255, 204, 0);
+		processing.ellipse(x * 12 + 5, y * 12 + 5, 5, 5);
+		break;
 	case BLOCK_FISH:
 	default:
 		processing.stroke(157, 157, 157);
