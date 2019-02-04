@@ -85,8 +85,6 @@ var drawBlock = function(blockId, x, y) {
 		processing.fill(115, 115, 115);
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
 		processing.stroke(89, 89, 89);
-		//processing.rect(x * BLOCK_SIZE + 9, y * BLOCK_SIZE + 9, 3, 3);
-		//processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 3, 3);
 		processing.rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
 		break;
 	case BLOCK_IRON:
@@ -142,8 +140,8 @@ var drawBlock = function(blockId, x, y) {
 		processing.ellipse(x * BLOCK_SIZE + 5, y * BLOCK_SIZE + 5, 5, 5);
 		break;
 	default:
-		processing.stroke(157, 157, 157);
-		processing.fill(166, 166, 166); 
+		processing.stroke(0, 0, 0);
+		processing.fill(0, 0, 0); 
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
 	}
 
@@ -168,7 +166,7 @@ var drawPlayer = function(p) {
 	processing.strokeWeight(1);
 	processing.fill(255, 145, 0); // orange for the body
 	processing.rect(p.x, p.y, 6, -6);// body
-	processing.fill(235, 202, 132); // tan (skin color)
+	processing.fill(235, 202, 132); // tan 
 	processing.rect(p.x, p.y - 6, 6, -4); // head
 	// arms
 	
