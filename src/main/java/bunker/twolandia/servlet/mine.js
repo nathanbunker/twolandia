@@ -42,6 +42,51 @@ const BLOCK_LEAVES = 13;
 const BLOCK_AMETHYST = 16;
 const BLOCK_FLAMES = 17;
 
+// 86 columns, 52 rows
+
+var visible = [];
+
+var visibleX = 0;
+var visibleY = 0;
+
+for (visibleY = 0; visibleY < field.length; visibleY++ ) {
+	visible[visibleY] = [];
+    for (visibleX = 0; visibleX < field[visibleY].length; visibleX++ ) {
+    	var block = [];
+    	block[0] = field[visibleY][visibleX];
+    	block[1] = BLOCK_STONE;
+    	block[2] = BLOCK_STONE;
+    	block[3] = BLOCK_STONE;
+    	block[4] = BLOCK_STONE;
+    	block[5] = BLOCK_STONE;
+    	if (visibleY > 0) {
+    		block[1] = field[visibleY - 1][visibleX];
+    		if (visibleX > 0) {
+    			block[2] = field[visibleY - 1][visibleX - 1];
+    		}
+    		if (visibleX < field[0].length - 1) {
+    			block[3] = field[visibleY - 1][visibleX + 1];
+    		}
+    	}
+		if (visibleX > 0) {
+			block[4] = field[visibleY][visibleX - 1];
+		}
+		if (visibleX < field[0].length - 1) {
+			block[5] = field[visibleY][visibleX + 1];
+		}
+		visible[visibleY][visibleX] = false;
+    	var i = 0;
+    	for (i = 0; i < block.length; i++) {
+        	if (block[i] == BLOCK_AIR
+        			|| block[i] == BLOCK_WOOD
+        			|| block[i] == BLOCK_LEAVES) {
+        		visible[visibleY][visibleX] = true;
+        		break;
+        	}    		
+    	}
+	}
+}
+
 
 var drawBlock = function(blockId, x, y) {
 	switch (blockId) {
@@ -157,7 +202,14 @@ var drawBlock = function(blockId, x, y) {
 var drawField = function() {
 	for (y in field) {
 		for (x in field[y]) {
-			drawBlock(field[y][x], x, y);
+			if (visible[y][x]) {
+				drawBlock(field[y][x], x, y);
+			}
+			else {
+				processing.noStroke();
+				processing.fill(200, 200, 200); 
+				processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 12, 12);
+			}
 		}
 	}
 }
@@ -218,7 +270,8 @@ var movePlayer = function(k) {
 		if (field[fieldY][fieldX] != BLOCK_AIR && 
 				field[fieldY][fieldX] != BLOCK_CAVE_AIR && 
 				field[fieldY][fieldX] != BLOCK_WATER &&
-				field[fieldY][fieldX] != BLOCK_WOOD) {
+				field[fieldY][fieldX] != BLOCK_WOOD &&
+				field[fieldY][fieldX] != BLOCK_LEAVES) {
 			player.x = fieldX * BLOCK_SIZE - 7;
 		}
 	} else if (processing.keyCode === processing.LEFT) {
@@ -228,7 +281,8 @@ var movePlayer = function(k) {
 		if (field[fieldY][fieldX] != BLOCK_AIR && 
 				field[fieldY][fieldX] != BLOCK_CAVE_AIR && 
 				field[fieldY][fieldX] != BLOCK_WATER &&
-				field[fieldY][fieldX] != BLOCK_WOOD) {
+				field[fieldY][fieldX] != BLOCK_WOOD &&
+				field[fieldY][fieldX] != BLOCK_LEAVES) {
 			player.x = fieldX * (BLOCK_SIZE + 1);
 		}
 		
@@ -237,14 +291,52 @@ var movePlayer = function(k) {
 		if (player.y < 1) {
 			player.y = 1;
 		}
+
+	
 	} else if (processing.keyCode === processing.DOWN) {
-		player.y += 2.0;
+		var fieldX = Math.floor((player.x + 0) / BLOCK_SIZE);
+		var fieldY = Math.floor((player.y + 1) / BLOCK_SIZE);
+		if (field[fieldY][fieldX] == BLOCK_WATER ||
+				field[fieldY][fieldX] == BLOCK_WOOD ||
+				field[fieldY][fieldX] == BLOCK_LEAVES) {
+			player.y += 2.0;
+		}
 	} else if (processing.key == 32) {
-		if (player.jump == 0 && player.y > 27) {
-			player.jump = 8;
-			player.y -= BLOCK_SIZE;
+		if (player.jump == 0 && player.y > 40) {
+			player.jump = 32;
 		}
 	}
+	
+	{
+		var fieldX = Math.floor((player.x + 7) / BLOCK_SIZE);
+		var fieldY = Math.floor((player.y - 5) / BLOCK_SIZE);
+		visible[fieldY][fieldX] = true;
+		if (fieldY > 0) {
+			visible[fieldY - 1][fieldX] = true;
+			if (fieldX > 0) {
+				visible[fieldY - 1][fieldX - 1] = true;
+			}
+		} 
+		if (fieldX > 0) {
+			visible[fieldY][fieldX - 1] = true;
+		}
+		if (fieldY < visible.length - 1) {
+			visible[fieldY + 1][fieldX] = true;
+			if (fieldX < visible[0].length - 1) {
+				visible[fieldY + 1][fieldX + 1] = true;
+			}
+		}
+		if (fieldX < visible[0].length - 1) {
+			visible[fieldY][fieldX + 1] = true;
+		}
+		if (fieldX < visible[0].length - 1  && fieldY > 0) {
+			visible[fieldY - 1][fieldX + 1] = true;
+		}
+		if (fieldX > 0  && fieldY < visible.length - 1) {
+			visible[fieldY + 1][fieldX - 1] = true;
+		}
+		
+	}	
 
 }
 
