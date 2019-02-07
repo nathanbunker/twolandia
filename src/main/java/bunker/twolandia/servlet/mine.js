@@ -112,7 +112,7 @@ var drawBlock = function(blockId, x, y) {
 		break;
 	case BLOCK_SAND:
 		processing.stroke(200, 200, 140);
-		processing.fill(255, 255, 153);
+		processing.fill(255, 255, 173);
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
 		break;
 	case BLOCK_WATER:
@@ -170,9 +170,20 @@ var drawBlock = function(blockId, x, y) {
 		processing.noStroke();
 		processing.fill(77, 38, 0);
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-		processing.fill(0, 0, 0);
-		processing.rect(x * BLOCK_SIZE + 9, y * BLOCK_SIZE + 9, 3, 3);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 3, 3);
+		processing.fill(51, 26, 0);
+		processing.rect(x * BLOCK_SIZE + 2, y * BLOCK_SIZE + 2, 2, 6);
+		processing.rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 4, 2, 6);
+		processing.fill(102, 53, 0);
+		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 2, 10);
+		processing.rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 10, 4, 2);
+		processing.rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 2, 2, 2);
+		processing.rect(x * BLOCK_SIZE + 4, y * BLOCK_SIZE + 6, 2, 2);
+		processing.fill(51, 26, 0);
+		processing.rect(x * BLOCK_SIZE + 8, y * BLOCK_SIZE + 6, 2, 2);
+		processing.rect(x * BLOCK_SIZE + 10, y * BLOCK_SIZE, 2, 4);
+		processing.fill(115, 77, 38);
+		processing.rect(x * BLOCK_SIZE + 4, y * BLOCK_SIZE, 2, 6);
+		processing.rect(x * BLOCK_SIZE + 10, y * BLOCK_SIZE + 4, 2, 6);
 		break;
 	case BLOCK_LEAVES:
 		processing.stroke(0, 102, 0);
