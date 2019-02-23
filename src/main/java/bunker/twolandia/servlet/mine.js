@@ -197,11 +197,27 @@ var drawBlock = function(blockId, x, y) {
 		processing.rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
 		break;
 	case BLOCK_FLAMES:
-		processing.stroke(255, 204, 0);
-		processing.fill(255, 102, 0);
+		processing.stroke(255, 255, 255);
+		processing.fill(255, 255, 255);
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
-		processing.rect(x * BLOCK_SIZE + 9, y * BLOCK_SIZE + 9, 3, 3);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 3, 3);
+		processing.fill(255, 102, 0);
+		processing.noStroke();
+		processing.rect(x * BLOCK_SIZE + 2, y * BLOCK_SIZE + 10, 10, 2);
+		processing.rect(x * BLOCK_SIZE + 2, y * BLOCK_SIZE + 6, 6, 2);
+		processing.rect(x * BLOCK_SIZE + 8, y * BLOCK_SIZE + 8, 2, 2);
+		processing.fill(255, 153, 0);
+		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE + 8, 6, 2);
+		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE + 8, 6, 2);
+		processing.fill(255, 255, 255);
+		processing.rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 8, 2, 4);
+		processing.fill(255, 204, 0);
+		processing.rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 8, 2, 2);
+		processing.rect(x * BLOCK_SIZE + 2, y * BLOCK_SIZE + 6, 2, 2);
+		processing.rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 2, 2, 2);
+		processing.fill(204, 51, 0);
+		processing.rect(x * BLOCK_SIZE + 4, y * BLOCK_SIZE + 4, 2, 2);
+		processing.rect(x * BLOCK_SIZE + 10, y * BLOCK_SIZE + 10, 2, 2);
+		
 		break;
 	default:
 		processing.stroke(0, 0, 0);
