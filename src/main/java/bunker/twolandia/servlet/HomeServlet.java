@@ -85,6 +85,8 @@ public class HomeServlet extends HttpServlet {
         "      <li><a href=\"" + link + GameFactory.MINE_FROSTY + "\">Mine - Frosty</a></li>");
     out.println(
         "      <li><a href=\"" + link + GameFactory.MINE_FOREST_CAVE + "\">Mine - Forest Cave</a></li>");
+    out.println(
+        "      <li><a href=\"" + link + GameFactory.LIFE + "\">Life - Original</a></li>");
     out.println("    <ul>");
     out.println("  </body>");
     out.println("</html>");

@@ -7,6 +7,7 @@ public class GameFactory {
   public static final String MINE = "mine";
   public static final String MINE_FROSTY = "mineFrosty";
   public static final String MINE_FOREST_CAVE = "mineForestCave";
+  public static final String LIFE = "life";
 
   public static Game getGame(String name) {
     Game game = null;
@@ -40,6 +41,14 @@ public class GameFactory {
       game.setHeight(600);
       game.setHasData(true);
       game.setWorld("forestcave");
+    } else if (name.equals(LIFE)) {
+      game = new Game();
+      game.setDescription("Life - Original");
+      game.setName(LIFE);
+      game.setWidth(1200);
+      game.setHeight(600);
+      game.setHasData(true);
+      game.setWorld("original");
     }
     return game;
   }
