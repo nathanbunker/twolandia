@@ -40,8 +40,8 @@ var drawBlock = function(blockId, x, y) {
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
 		break;
 	case BLOCK_STONE:
-		processing.stroke(157, 157, 157);
-		processing.fill(166, 166, 166); // 
+		processing.stroke(0, 150, 0);
+		processing.fill(0, 204, 0); 
 		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
 		break;
 	default:
