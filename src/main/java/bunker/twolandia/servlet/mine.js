@@ -243,7 +243,7 @@ var drawField = function() {
 
 var drawPlayer = function(p) {
 	if (p.starting) {
-		messageToPlayer.text = "Welcome to Twolandia!";
+		messageToPlayer.text = "Welcome to Twolandia!\nArrow keys to move.\nA, Z, X, C, D, E, W, Q, 1, 2, or 3.\nkeys to place/remove blocks";
 		messageToPlayer.ttl = 15 * 60;
 		p.starting = false;
 	}
