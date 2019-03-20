@@ -243,7 +243,7 @@ var drawField = function() {
 
 var drawPlayer = function(p) {
 	if (p.starting) {
-		messageToPlayer.text = "Welcome to Twolandia!\nArrow keys to move.\nA, Z, X, C, D, E, W, Q, 1, 2, or 3.\nkeys to place/remove blocks";
+		messageToPlayer.text = "Welcome to Twolandia!\nArrow keys to move.\nA, Z, X, C, D, E, W, Q, 1, 2, or 3.\nkeys to place/remove blocks.";
 		messageToPlayer.ttl = 15 * 60;
 		p.starting = false;
 	}
@@ -255,7 +255,14 @@ var drawPlayer = function(p) {
 	processing.rect(p.x, p.y, 6, -6);// body
 	processing.fill(235, 202, 132); // tan 
 	processing.rect(p.x, p.y - 6, 6, -4); // head
+	processing.stroke(102, 51, 0);
+	processing.line(p.x + 1, p.y - 3, p.x + 5, p.y - 3);// belt
+	processing.stroke(77, 77, 77);
+	processing.point(p.x + 2, p.y - 2);
+	processing.stroke(102, 102, 153);
+	processing.point(p.x + 5, p.y - 2);
 	// arms
+	processing.stroke(0, 0, 0);
 	
 	if (p.rest > 0) {
 		p.rest--;
