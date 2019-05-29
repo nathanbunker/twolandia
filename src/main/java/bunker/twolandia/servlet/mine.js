@@ -337,7 +337,7 @@ var movePlayer = function(k) {
 		}
 	} else if (processing.key == 32) {
 		if (player.jump == 0 && player.y > 40) {
-			player.jump = 32;
+			player.jump = 32;//32
 		}
 	}
 	

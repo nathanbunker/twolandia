@@ -15,7 +15,7 @@ public class GameFactory {
       game = new Game();
       game.setDescription("Kahn Original");
       game.setName(KAHN_ORIGINAL);
-      game.setWidth(400);
+      game.setWidth(1200);
       game.setHeight(400);
     } else if (name.equals(MINE)) {
       game = new Game();
