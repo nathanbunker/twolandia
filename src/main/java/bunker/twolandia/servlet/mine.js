@@ -499,7 +499,10 @@ var playerDigs = function(p, k) {
 				field[fieldY][fieldX] = BLOCK_WATER;
 			} else if (leftSideBlock == BLOCK_CAVE_AIR || rightSideBlock == BLOCK_CAVE_AIR || topSideBlock == BLOCK_CAVE_AIR) {
 				field[fieldY][fieldX] = BLOCK_CAVE_AIR;
+			} else if (leftSideBlock == BLOCK_FLAMES || rightSideBlock == BLOCK_FLAMES || topSideBlock == BLOCK_FLAMES && field[fieldY][fieldX] == BLOCK_WOOD) {
+				field[fieldY][fieldX] = BLOCK_FLAMES;
 			}
+			
 			else {
 				field[fieldY][fieldX] = BLOCK_AIR;
 			}
