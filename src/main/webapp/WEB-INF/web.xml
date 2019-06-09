@@ -8,9 +8,17 @@
     <servlet-name>HomeServlet</servlet-name>
     <servlet-class>bunker.twolandia.servlet.HomeServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>MinerServlet</servlet-name>
+    <servlet-class>bunker.twolandia.servlet.MinerServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
-  <servlet-name>HomeServlet</servlet-name>
+    <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MinerServlet</servlet-name>
+    <url-pattern>/miner</url-pattern>
   </servlet-mapping>
 
 </web-app>

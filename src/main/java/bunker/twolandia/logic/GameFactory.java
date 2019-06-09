@@ -8,6 +8,7 @@ public class GameFactory {
   public static final String MINE_FROSTY = "mineFrosty";
   public static final String MINE_FOREST_CAVE = "mineForestCave";
   public static final String LIFE = "life";
+  public static final String MINER = "miner";
 
   public static Game getGame(String name) {
     Game game = null;
@@ -17,6 +18,12 @@ public class GameFactory {
       game.setName(KAHN_ORIGINAL);
       game.setWidth(1200);
       game.setHeight(400);
+    } else if (name.equals(MINER)) {
+      game = new Game();
+      game.setDescription("Miner - Frosty");
+      game.setName(MINER);
+      game.setWidth(1200);
+      game.setHeight(600);
     } else if (name.equals(MINE)) {
       game = new Game();
       game.setDescription("Mine - Original");
