@@ -44,4 +44,18 @@ public class Game {
   public void setWidth(int width) {
     this.width = width;
   }
+  
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null)
+    {
+      return false;
+    }
+    if (obj instanceof Game)
+    {
+      Game otherGame = (Game) obj;
+      return otherGame.getName().equals(this.getName()) && otherGame.getWorld().equals(this.getWorld());
+    }
+    return false;
+  }
 }

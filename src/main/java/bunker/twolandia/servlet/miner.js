@@ -8,8 +8,12 @@ var player = {
 	rest : 0,
 	jump : 0,
 	starting : true,
-	holdingBlock : 0
+	holdingBlock : 0,
+	form: 'person',
+	name: playerName
 };
+
+
 
 var messageToPlayer = {
 	text : "",
@@ -43,52 +47,6 @@ const BLOCK_AMETHYST = 16;
 const BLOCK_FLAMES = 17;
 
 // 86 columns, 52 rows
-
-var visible = [];
-
-var visibleX = 0;
-var visibleY = 0;
-
-var setupWorld = function() { 
-for (visibleY = 0; visibleY < field.length; visibleY++ ) {
-	visible[visibleY] = [];
-    for (visibleX = 0; visibleX < field[visibleY].length; visibleX++ ) {
-    	var block = [];
-    	block[0] = field[visibleY][visibleX];
-    	block[1] = BLOCK_STONE;
-    	block[2] = BLOCK_STONE;
-    	block[3] = BLOCK_STONE;
-    	block[4] = BLOCK_STONE;
-    	block[5] = BLOCK_STONE;
-    	if (visibleY > 0) {
-    		block[1] = field[visibleY - 1][visibleX];
-    		if (visibleX > 0) {
-    			block[2] = field[visibleY - 1][visibleX - 1];
-    		}
-    		if (visibleX < field[0].length - 1) {
-    			block[3] = field[visibleY - 1][visibleX + 1];
-    		}
-    	}
-		if (visibleX > 0) {
-			block[4] = field[visibleY][visibleX - 1];
-		}
-		if (visibleX < field[0].length - 1) {
-			block[5] = field[visibleY][visibleX + 1];
-		}
-		visible[visibleY][visibleX] = false;
-    	var i = 0;
-    	for (i = 0; i < block.length; i++) {
-        	if (block[i] == BLOCK_AIR
-        			|| block[i] == BLOCK_WOOD
-        			|| block[i] == BLOCK_LEAVES) {
-        		visible[visibleY][visibleX] = true;
-        		break;
-        	}    		
-    	}
-	}
-}
-
-}
 
 
 var drawBlock = function(blockId, x, y) {
@@ -232,14 +190,7 @@ var drawBlock = function(blockId, x, y) {
 var drawField = function() {
 	for (y in field) {
 		for (x in field[y]) {
-			if (visible[y][x]) {
-				drawBlock(field[y][x], x, y);
-			}
-			else {
-				processing.noStroke();
-				processing.fill(200, 200, 200); 
-				processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 12, 12);
-			}
+			drawBlock(field[y][x], x, y);
 		}
 	}
 }
@@ -297,7 +248,19 @@ var drawPlayer = function(p) {
 	processing.stroke(0, 0, 0);
 	processing.point(p.x + 2 + p.lookingRight, p.y - 8 + p.lookingDown);
 	processing.point(p.x + 4 + p.lookingRight, p.y - 8 + p.lookingDown);
+	
+	processing.textAlign(processing.CENTER);
+	processing.textSize(10);
+	processing.text(p.name, p.x + 3, p.y - 12);
+	processing.textAlign(processing.LEFT);
 };
+
+var reportPlayer = function(p) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "miner?action=report&x=" + p.x + "&y=" + p.y + "&lookingRight=" + p.lookingRight 
+			+ "&lookingDown=" + p.lookingDown+ "&holdingBlock=" + p.holdingBlock + "&name=" + encodeURI(p.name), true);
+	xhttp.send();
+}
 
 var movePlayer = function(k) {
 	if (processing.keyCode === processing.RIGHT) {
@@ -343,37 +306,7 @@ var movePlayer = function(k) {
 			player.jump = 32;//32
 		}
 	}
-	
-	{
-		var fieldX = Math.floor((player.x + 7) / BLOCK_SIZE);
-		var fieldY = Math.floor((player.y - 5) / BLOCK_SIZE);
-		visible[fieldY][fieldX] = true;
-		if (fieldY > 0) {
-			visible[fieldY - 1][fieldX] = true;
-			if (fieldX > 0) {
-				visible[fieldY - 1][fieldX - 1] = true;
-			}
-		} 
-		if (fieldX > 0) {
-			visible[fieldY][fieldX - 1] = true;
-		}
-		if (fieldY < visible.length - 1) {
-			visible[fieldY + 1][fieldX] = true;
-			if (fieldX < visible[0].length - 1) {
-				visible[fieldY + 1][fieldX + 1] = true;
-			}
-		}
-		if (fieldX < visible[0].length - 1) {
-			visible[fieldY][fieldX + 1] = true;
-		}
-		if (fieldX < visible[0].length - 1  && fieldY > 0) {
-			visible[fieldY - 1][fieldX + 1] = true;
-		}
-		if (fieldX > 0  && fieldY < visible.length - 1) {
-			visible[fieldY + 1][fieldX - 1] = true;
-		}
-		
-	}	
+	reportPlayer(player);
 
 }
 
@@ -388,7 +321,7 @@ var fallPlayer = function(p) {
 		// we are standing on the sky!
 		// move down by one
 		if (p.jump > 0) {
-			p.x += player.lookingRight * 3;
+			p.x += p.lookingRight * 3;
 			if (p.jump <= 1) {
 				p.y -= 1;
 				p.jump = 0;
@@ -405,11 +338,12 @@ var fallPlayer = function(p) {
 				p.y = fieldYf * BLOCK_SIZE;
             }
 		}
+		reportPlayer(p);
 	} else if (field[fieldY][fieldX] == BLOCK_WATER
 			&& field[fieldY][fieldXr] == BLOCK_WATER) {
 		// we are in the water, now you should sink
 		// move down by one
-		p.x += player.lookingRight * 0.5;
+		p.x += p.lookingRight * 0.5;
 		p.y += 0.2;
 		if (p.jump > 0) {
 			p.y--;
@@ -417,8 +351,9 @@ var fallPlayer = function(p) {
 		} else {
 			p.jump = 0;
 		}
+		reportPlayer(p);
 	} else if (p.jump > 0) {
-		p.x += player.lookingRight * 3;
+		p.x += p.lookingRight * 3;
 		if (p.jump == 1) {
 			p.y -= 1;
 			p.jump = 0;
@@ -426,6 +361,7 @@ var fallPlayer = function(p) {
 			p.y -= p.jump / 2;
 			p.jump = p.jump / 2;
 		}
+		reportPlayer(p);
 	} else {
 		p.jump = 0;
 	}
@@ -509,12 +445,27 @@ var playerDigs = function(p, k) {
 			else {
 				field[fieldY][fieldX] = BLOCK_AIR;
 			}
+			
+			// need to do this: field = [stuff from server] 
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", "miner?action=mine&x=" + fieldX + "&y=" + fieldY + "&block=" + field[fieldY][fieldX], true);
+			xhttp.send();
+			
+			reportPlayer(player);
+
 		}
 	}
 	else {
 		if (blockId == BLOCK_AIR || blockId == BLOCK_CAVE_AIR || blockId == BLOCK_WATER) {
 			field[fieldY][fieldX] = player.holdingBlock;
+			
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", "miner?action=mine&x=" + fieldX + "&y=" + fieldY + "&block=" + field[fieldY][fieldX], true);
+			xhttp.send();
+			
 			player.holdingBlock = 0;
+			
+			reportPlayer(player);
 		}
 		else {
 			// ignore dig command
@@ -567,6 +518,22 @@ processing.mouseReleased = function() {
 
 }
 
+var players = null;
+
+var updatePlayers = function()
+{
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() 
+	{
+		if (this.readyState == 4 && this.status == 200)
+		{
+			players = JSON.parse(this.response);
+		}
+	}
+	xhttp.open("GET", "miner?show=players", true);
+	xhttp.send();
+}
+
 
 var field;
 
@@ -594,16 +561,26 @@ processing.draw = function() {
 		checkCount = 0;
 		updateMap();
 		if (field != null) {
-			setupWorld();
 			initialized = true;
 		}
 	}
+	updatePlayers();
 	if (initialized) {
 		checkCount++;
 		fallPlayer(player);
 		processing.background(255, 255, 255);
 		drawField();
 		drawPlayer(player);
+		if (players != null )
+		{
+			for (i = 0; i < players.length; i++)
+			{
+				if (players[i].name != player.name)
+				{
+					drawPlayer(players[i]);
+				}
+			}
+		}
 		drawMessage();
 	}
 }

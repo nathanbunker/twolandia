@@ -47,6 +47,10 @@ public class HomeServlet extends HttpServlet {
       session.setAttribute("player", player);
     }
 
+    if (req.getParameter(PARAM_PLAYER_NAME) != null) {
+      player.setName(req.getParameter(PARAM_PLAYER_NAME));
+    }
+
     String action = req.getParameter(PARAM_ACTION);
     if (action != null) {
       if (action.equals(ACTION_SAVE)) {
@@ -67,6 +71,7 @@ public class HomeServlet extends HttpServlet {
     out.println("          processing.size(" + game.getWidth() + ", " + game.getHeight() + ");");
     out.println("        }");
     out.println("        processing.draw = function() { ");
+    out.println("          var playerName = '" + player.getName() + "'; ");
     if (game.isHasData()) {
       inlineJavascript(out, game.getName() + "-" + game.getWorld());
     }
@@ -76,20 +81,32 @@ public class HomeServlet extends HttpServlet {
     out.println("      var canvas = document.getElementById(\"canvas1\"); ");
     out.println("      var processingInstance = new Processing(canvas, sketchProc) ");
     out.println("    </script>");
-    String link = "home?" + PARAM_GAME_NAME + "=";
-    out.println("    <ul>");
+    out.println("    <form method=\"GET\" action=\"home\">");
+    out.println("    <table>");
+    out.println("      <tr>");
+    out.println("        <td>Name</td>");
+    out.println("        <td><input type=\"text\" name=\"" + PARAM_PLAYER_NAME + "\" value=\""
+        + player.getName() + "\"></td>");
+    out.println("      </tr>");
+    out.println("      <tr>");
+    out.println("        <td>Game</td>");
+    out.println("        <td>");
+    for (String gn : new String[] {GameFactory.KAHN_ORIGINAL, GameFactory.MINE,
+        GameFactory.MINE_FROSTY, GameFactory.MINE_FOREST_CAVE, GameFactory.LIFE,
+        GameFactory.MINER}) {
+      Game g = GameFactory.getGame(gn);
+
+      out.println("          <input type=\"radio\" name=\"" + PARAM_GAME_NAME + "\" value=\"" + gn
+          + "\"" + (g.equals(game) ? " checked" : "") + ">" + g.getDescription() + "</br>");
+    }
+    out.println("        </td>");
+    out.println("      </tr>");
+    out.println("      <tr>");
     out.println(
-        "      <li><a href=\"" + link + GameFactory.KAHN_ORIGINAL + "\">Kahn Original</a></li>");
-    out.println("      <li><a href=\"" + link + GameFactory.MINE + "\">Mine - Original</a></li>");
-    out.println(
-        "      <li><a href=\"" + link + GameFactory.MINE_FROSTY + "\">Mine - Frosty</a></li>");
-    out.println(
-        "      <li><a href=\"" + link + GameFactory.MINE_FOREST_CAVE + "\">Mine - Forest Cave</a></li>");
-    out.println(
-        "      <li><a href=\"" + link + GameFactory.LIFE + "\">Life - Original</a></li>");
-    out.println(
-        "      <li><a href=\"" + link + GameFactory.MINER + "\">Miner - Frosty</a></li>");
-    out.println("    <ul>");
+        "        <td colspan=\"2\" align=\"right\"><input type=\"submit\" name=\"submit\" value=\"Select\"></td>");
+    out.println("      </tr>");
+    out.println("    </table>");
+    out.println("    </form>");
     out.println("  </body>");
     out.println("</html>");
 
