@@ -1,6 +1,8 @@
 package bunker.twolandia.logic;
 
-import bunker.twolandia.model.Game;
+import bunker.twolandia.model.GameAvailable;
+import bunker.twolandia.model.GameHandler;
+import bunker.twolandia.model.User;
 
 public class GameFactory {
   public static final String KAHN_ORIGINAL = "program";
@@ -10,52 +12,55 @@ public class GameFactory {
   public static final String LIFE = "life";
   public static final String MINER = "miner";
 
-  public static Game getGame(String name) {
-    Game game = null;
-    if (name.equals(KAHN_ORIGINAL)) {
-      game = new Game();
-      game.setDescription("Kahn Original");
-      game.setName(KAHN_ORIGINAL);
-      game.setWidth(1200);
-      game.setHeight(400);
-    } else if (name.equals(MINER)) {
-      game = new Game();
-      game.setDescription("Miner - Frosty");
-      game.setName(MINER);
-      game.setWidth(1200);
-      game.setHeight(600);
-    } else if (name.equals(MINE)) {
-      game = new Game();
-      game.setDescription("Mine - Original");
-      game.setName(MINE);
-      game.setWidth(1200);
-      game.setHeight(600);
-      game.setHasData(true);
-      game.setWorld("original");
-    } else if (name.equals(MINE_FROSTY)) {
-      game = new Game();
-      game.setDescription("Mine - Frosty");
-      game.setName(MINE);
-      game.setWidth(1200);
-      game.setHeight(600);
-      game.setHasData(true);
-      game.setWorld("frosty");
-    } else if (name.equals(MINE_FOREST_CAVE)) {
-      game = new Game();
-      game.setDescription("Mine - Forest Cave");
-      game.setName(MINE);
-      game.setWidth(1200);
-      game.setHeight(600);
-      game.setHasData(true);
-      game.setWorld("forestcave");
-    } else if (name.equals(LIFE)) {
-      game = new Game();
-      game.setDescription("Life - Original");
-      game.setName(LIFE);
-      game.setWidth(1200);
-      game.setHeight(600);
-      game.setHasData(true);
-      game.setWorld("original");
+  public static GameHandler getGame(String name, User user) {
+    GameHandler game = null;
+    GameAvailable gameAvailable = GameAvailable.getGameAvailable(name);
+    switch (gameAvailable)
+    {
+      case KAHN_ORIGINAL:
+        game = new DefaultGameHandler(gameAvailable, user);
+        game.setName(KAHN_ORIGINAL);
+        game.setWidth(1200);
+        game.setHeight(400);
+        break;
+      case LIFE:
+        game = new DefaultGameHandler(gameAvailable, user);
+        game.setName(LIFE);
+        game.setWidth(1200);
+        game.setHeight(600);
+        game.setHasData(true);
+        game.setWorld("original");
+        break;
+      case MINE:
+        game = new DefaultGameHandler(gameAvailable, user);
+        game.setName(MINE);
+        game.setWidth(1200);
+        game.setHeight(600);
+        game.setHasData(true);
+        game.setWorld("original");
+        break;
+      case MINER:
+        game = new MinerGameHandler(gameAvailable, user);
+        game.setName(MINER);
+        game.setWidth(1200);
+        game.setHeight(600);
+        break;
+      case MINE_FOREST_CAVE:
+        game = new DefaultGameHandler(gameAvailable, user);
+        game.setName(MINE);
+        game.setWidth(1200);
+        game.setHeight(600);
+        game.setHasData(true);
+        game.setWorld("forestcave");
+        break;
+      case MINE_FROSTY:
+        game = new DefaultGameHandler(gameAvailable, user);
+        game.setName(MINE);
+        game.setWidth(1200);
+        game.setHeight(600);
+        game.setHasData(true);
+        game.setWorld("frosty");
+        break;
     }
     return game;
   }

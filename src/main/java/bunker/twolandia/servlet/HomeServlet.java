@@ -10,16 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import bunker.twolandia.logic.GameFactory;
-import bunker.twolandia.model.Game;
-import bunker.twolandia.model.Player;
+import bunker.twolandia.model.GameAvailable;
+import bunker.twolandia.model.GameHandler;
+import bunker.twolandia.model.User;
 
 public class HomeServlet extends HttpServlet {
 
   private static final String PARAM_GAME_NAME = "gameName";
-  private static final String PARAM_PLAYER_NAME = "playerName";
+  private static final String PARAM_USER_NAME = "userName";
   private static final String PARAM_ACTION = "action";
 
-  private static final String ACTION_SAVE = "Save";
+  private static final String ACTION_LOAD_GAME = "Load Game";
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -28,82 +29,85 @@ public class HomeServlet extends HttpServlet {
     PrintWriter out = new PrintWriter(resp.getOutputStream());
     HttpSession session = req.getSession(true);
 
-    Integer count = (Integer) session.getAttribute("count");
-    if (count == null) {
-      count = 1;
-    } else {
-      count = count + 1;
-    }
-    session.setAttribute("count", count);
     String gameName = GameFactory.KAHN_ORIGINAL;
     if (req.getParameter(PARAM_GAME_NAME) != null) {
       gameName = req.getParameter(PARAM_GAME_NAME);
     }
-    Game game = GameFactory.getGame(gameName);
 
-    Player player = (Player) session.getAttribute("player");
-    if (player == null) {
-      player = new Player();
-      session.setAttribute("player", player);
-    }
-
-    if (req.getParameter(PARAM_PLAYER_NAME) != null) {
-      player.setName(req.getParameter(PARAM_PLAYER_NAME));
-    }
+    GameHandler game = (GameHandler) session.getAttribute("game");
 
     String action = req.getParameter(PARAM_ACTION);
+    String message = null;
     if (action != null) {
-      if (action.equals(ACTION_SAVE)) {
-        player.setName(req.getParameter(PARAM_PLAYER_NAME));
+      if (action.equals(ACTION_LOAD_GAME)) {
+        if (game != null) {
+          game.leaveGame();
+        }
+        game = null;
+        String username = req.getParameter(PARAM_USER_NAME);
+        if (username.equals("")) {
+          message = "Name is required";
+        } else {
+          User user = new User();
+          user.setName(username);
+          game = GameFactory.getGame(gameName, user);
+        }
       }
     }
 
     out.println("<html>");
     out.println("  <head>");
     out.println("   <title>Twolandia</title>");
-    out.println("   <script src=\"processing.js\"></script>");
+    if (game != null) {
+      out.println("   <script src=\"processing.js\"></script>");
+    }
     out.println("  </head>");
     out.println("  <body>");
-    out.println("    <canvas id=\"canvas1\"></canvas>");
-    out.println("    <script>");
-    out.println("      function sketchProc(processing) { ");
-    out.println("        processing.setup = function() { ");
-    out.println("          processing.size(" + game.getWidth() + ", " + game.getHeight() + ");");
-    out.println("        }");
-    out.println("        processing.draw = function() { ");
-    out.println("          var playerName = '" + player.getName() + "'; ");
-    if (game.isHasData()) {
-      inlineJavascript(out, game.getName() + "-" + game.getWorld());
+    if (game != null) {
+      User user = game.getUser();
+      out.println("    <canvas id=\"canvas1\"></canvas>");
+      out.println("    <script>");
+      out.println("      function sketchProc(processing) { ");
+      out.println("        processing.setup = function() { ");
+      out.println("          processing.size(" + game.getWidth() + ", " + game.getHeight() + ");");
+      out.println("        }");
+      out.println("        processing.draw = function() { ");
+      out.println("          var playerName = '" + user.getName() + "'; ");
+      if (game.isHasData()) {
+        inlineJavascript(out, game.getName() + "-" + game.getWorld());
+      }
+      inlineJavascript(out, game.getName());
+      out.println("        }");
+      out.println("      }");
+      out.println("      var canvas = document.getElementById(\"canvas1\"); ");
+      out.println("      var processingInstance = new Processing(canvas, sketchProc) ");
+      out.println("    </script>");
     }
-    inlineJavascript(out, game.getName());
-    out.println("        }");
-    out.println("      }");
-    out.println("      var canvas = document.getElementById(\"canvas1\"); ");
-    out.println("      var processingInstance = new Processing(canvas, sketchProc) ");
-    out.println("    </script>");
+    if (message != null) {
+      out.println("<p><font color=\"red\">" + message + "</font></p>");
+    }
     out.println("    <form method=\"GET\" action=\"home\">");
     out.println("    <table>");
     out.println("      <tr>");
     out.println("        <td>Name</td>");
-    out.println("        <td><input type=\"text\" name=\"" + PARAM_PLAYER_NAME + "\" value=\""
-        + player.getName() + "\"></td>");
+    String username = game == null ? "" : game.getUser().getName();
+    out.println("        <td><input type=\"text\" name=\"" + PARAM_USER_NAME + "\" value=\""
+        + username + "\"></td>");
     out.println("      </tr>");
     out.println("      <tr>");
     out.println("        <td>Game</td>");
     out.println("        <td>");
-    for (String gn : new String[] {GameFactory.KAHN_ORIGINAL, GameFactory.MINE,
-        GameFactory.MINE_FROSTY, GameFactory.MINE_FOREST_CAVE, GameFactory.LIFE,
-        GameFactory.MINER}) {
-      Game g = GameFactory.getGame(gn);
-
-      out.println("          <input type=\"radio\" name=\"" + PARAM_GAME_NAME + "\" value=\"" + gn
-          + "\"" + (g.equals(game) ? " checked" : "") + ">" + g.getDescription() + "</br>");
+    for (GameAvailable gameAvailable : GameAvailable.values()) {
+      out.println("          <input type=\"radio\" name=\"" + PARAM_GAME_NAME + "\" value=\""
+          + gameAvailable.getId() + "\""
+          + ((game != null && game.getGameAvailable() == gameAvailable) ? " checked" : "") + ">"
+          + gameAvailable.getDescription() + "</br>");
     }
     out.println("        </td>");
     out.println("      </tr>");
     out.println("      <tr>");
-    out.println(
-        "        <td colspan=\"2\" align=\"right\"><input type=\"submit\" name=\"submit\" value=\"Select\"></td>");
+    out.println("        <td colspan=\"2\" align=\"right\"><input type=\"submit\" name=\""
+        + PARAM_ACTION + "\" value=\"" + ACTION_LOAD_GAME + "\"></td>");
     out.println("      </tr>");
     out.println("    </table>");
     out.println("    </form>");

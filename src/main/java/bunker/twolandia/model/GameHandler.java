@@ -1,12 +1,37 @@
 package bunker.twolandia.model;
 
-public class Game {
-  private String name = "";
-  private String description = "";
-  private int height = 400;
-  private int width = 400;
-  private boolean hasData = false; 
-  private String world = "";
+public abstract class GameHandler {
+  protected String name = "";
+  protected String description = "";
+  protected int height = 400;
+  protected int width = 400;
+  protected boolean hasData = false; 
+  protected String world = "";
+  protected User user = null;
+  protected GameAvailable gameAvailable;
+  
+  public GameAvailable getGameAvailable() {
+    return gameAvailable;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public GameHandler(GameAvailable gameAvailable, User user)
+  {
+    this.gameAvailable = gameAvailable;
+    this.user = user;
+    this.description = gameAvailable.getDescription();
+  }
+  
+  public abstract void changeName(String newName);
+  
+  public abstract void leaveGame();
   
   public String getWorld() {
     return world;
@@ -51,9 +76,9 @@ public class Game {
     {
       return false;
     }
-    if (obj instanceof Game)
+    if (obj instanceof GameHandler)
     {
-      Game otherGame = (Game) obj;
+      GameHandler otherGame = (GameHandler) obj;
       return otherGame.getName().equals(this.getName()) && otherGame.getWorld().equals(this.getWorld());
     }
     return false;

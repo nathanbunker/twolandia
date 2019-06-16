@@ -1,6 +1,6 @@
 package bunker.twolandia.model;
 
-public class Player {
+public class User {
   private String name = "";
   private int hearts = 100;
   private int points = 0;
