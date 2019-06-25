@@ -59,7 +59,7 @@ var drawBlock = function(blockId, x, y) {
 	case BLOCK_STONE:
 		processing.stroke(157, 157, 157);
 		processing.fill(166, 166, 166); // 
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1  );
 		break;
 	case BLOCK_DIRT:
 		processing.stroke(118, 54, 0);
