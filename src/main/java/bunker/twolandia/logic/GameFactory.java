@@ -20,8 +20,8 @@ public class GameFactory {
       case KAHN_ORIGINAL:
         game = new DefaultGameHandler(gameAvailable, user);
         game.setName(KAHN_ORIGINAL);
-        game.setWidth(1200);
-        game.setHeight(400);
+        game.setWidth(300);
+        game.setHeight(600);
         break;
       case LIFE:
         game = new DefaultGameHandler(gameAvailable, user);
