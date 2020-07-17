@@ -19,7 +19,7 @@ import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 // to debug SSL problems add this to the parameters: -Djavax.net.debug=all
-public class StartTester
+public class StartTwoLandia
 {
 
   private static boolean TRUST_ALL_CERTS = true;

@@ -63,25 +63,20 @@ public class HomeServlet extends HttpServlet {
     }
     out.println("  </head>");
     out.println("  <body>");
+
     if (game != null) {
       User user = game.getUser();
-      out.println("    <canvas id=\"canvas1\"></canvas>");
-      out.println("    <script>");
-      out.println("      function sketchProc(processing) { ");
-      out.println("        processing.setup = function() { ");
-      out.println("          processing.size(" + game.getWidth() + ", " + game.getHeight() + ");");
-      out.println("        }");
-      out.println("        processing.draw = function() { ");
-      out.println("          var playerName = '" + user.getName() + "'; ");
+      out.println("<script type=\"text/processing\" data-processing-target=\"processing-canvas\">");
+      out.println("  var playerName = '" + user.getName() + "'; ");
+      out.println("  void setup() {");
+      out.println("    size(" + game.getWidth() + ", " + game.getHeight() + ");");
+      out.println("  } ");
       if (game.isHasData()) {
         inlineJavascript(out, game.getName() + "-" + game.getWorld());
       }
       inlineJavascript(out, game.getName());
-      out.println("        }");
-      out.println("      }");
-      out.println("      var canvas = document.getElementById(\"canvas1\"); ");
-      out.println("      var processingInstance = new Processing(canvas, sketchProc) ");
-      out.println("    </script>");
+      out.println("</script>");
+      out.println("<canvas id=\"processing-canvas\"> </canvas>");
     }
     if (message != null) {
       out.println("<p><font color=\"red\">" + message + "</font></p>");
@@ -111,6 +106,7 @@ public class HomeServlet extends HttpServlet {
     out.println("      </tr>");
     out.println("    </table>");
     out.println("    </form>");
+
     out.println("  </body>");
     out.println("</html>");
 

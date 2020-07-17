@@ -7,22 +7,129 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import com.google.gson.Gson;
 
 public class WorldMinder extends Thread {
 
+  private static final boolean RANDOM_WORLD = true;
+
   public WorldMinder() {
-    Gson gson = new Gson();
+    if (RANDOM_WORLD) {
+      int worldHeight = 51;
+      int worldWidth = 100;
+      int startingSkyHeight = 10;
+      world = new Integer[worldHeight][worldWidth];
+      double[] skyHeight = new double[worldWidth];
+      for (int j = 0; j < worldWidth; j++) {
+        skyHeight[j] = startingSkyHeight;
+      }
 
-    InputStream in = this.getClass().getResourceAsStream("miner.json");
-    if (in == null) {
-      throw new NullPointerException("Unable to find miner.data");
+      Random random = new Random();
+      int startJ = 0;
+      double height = startingSkyHeight;
+      double triangleWidth = worldWidth;
+
+      triangulate(skyHeight, random, startJ, height, triangleWidth);
+
+      for (int i = 0; i < worldHeight; i++) {
+        for (int j = 0; j < world[i].length; j++) {
+          if (skyHeight[j] > i) {
+            world[i][j] = BLOCK_AIR;
+          } else {
+            world[i][j] = BLOCK_STONE;
+          }
+        }
+      }
+
+      int[][] cavePoints = new int[11][2];
+      for (int k = 0; k < cavePoints.length; k++) {
+        int j = random.nextInt(worldWidth);
+        if ((skyHeight[j] + 2) < worldHeight) {
+          int i = random.nextInt(worldHeight - ((int) skyHeight[j]) - 2) + ((int) skyHeight[j]) + 1;
+          cavePoints[k][0] = i;
+          cavePoints[k][1] = j;
+        }
+      }
+      for (int k = 0; k < cavePoints.length; k++) {
+        world[cavePoints[k][0]][cavePoints[k][1]] = BLOCK_CAVE_AIR;
+      }
+      for (int k1 = 0; k1 < cavePoints.length; k1++) {
+        System.out
+            .println("--> [" + k1 + "] {" + cavePoints[k1][0] + "," + cavePoints[k1][1] + "}");
+      }
+      for (int k1 = 0; k1 < cavePoints.length; k1++) {
+        for (int k2 = k1 + 1; k2 < cavePoints.length; k2++) {
+
+          int distI = Math.abs(cavePoints[k1][0] - cavePoints[k2][0]);
+          int distJ = Math.abs(cavePoints[k1][1] - cavePoints[k2][1]);
+          System.out.println("--> [" + k1 + ", " + k2 + "] distI = " + distI + " distJ = " + distJ);
+          if (distI < 7 && distJ < 25) {
+            int sI = cavePoints[k2][0];
+            int eI = cavePoints[k1][0];
+            if (cavePoints[k1][0] < cavePoints[k2][0]) {
+              sI = cavePoints[k1][0];
+              eI = cavePoints[k2][0];
+            }
+            int sJ = cavePoints[k2][1];
+            int eJ = cavePoints[k1][1];
+            if (cavePoints[k1][1] < cavePoints[k2][1]) {
+              sJ = cavePoints[k1][1];
+              eJ = cavePoints[k2][1];
+            }
+            System.out.println("-->   CAVE !!!! {" + sI + "-" + eI + ", " + sJ + "-" + eJ + "}");
+            for (int i = sI; i <= eI; i++) {
+              for (int j = sJ; j <= eJ; j++) {
+                if (world[i][j] != BLOCK_CAVE_AIR && world[i][j] != BLOCK_AIR) {
+                  world[i][j] = BLOCK_CAVE_AIR;
+                }
+              }
+            }
+          }
+        }
+      }
+    } else {
+      Gson gson = new Gson();
+
+      InputStream in = this.getClass().getResourceAsStream("miner.json");
+      if (in == null) {
+        throw new NullPointerException("Unable to find miner.data");
+      }
+      InputStreamReader reader = new InputStreamReader(in);
+      BufferedReader buf = new BufferedReader(reader);
+      world = gson.fromJson(buf, Integer[][].class);
     }
-    InputStreamReader reader = new InputStreamReader(in);
-    BufferedReader buf = new BufferedReader(reader);
-    world = gson.fromJson(buf, Integer[][].class);
+  }
 
-
+  private void triangulate(double[] skyHeight, Random random, int startJ, double height,
+      double triangleWidth) {
+    int middleJ = (int) (triangleWidth / 2.0) + startJ;
+    double triangleHeight = (random.nextBoolean() ? -1 : 1) * random.nextGaussian() * height;
+    if (triangleHeight > 0) {
+      double triangleDiff = triangleHeight / (triangleWidth / 2.0);
+      for (int j = startJ; j < triangleWidth + startJ; j++) {
+        if (j < middleJ) {
+          skyHeight[j] += ((j - startJ) * triangleDiff);
+        } else {
+          skyHeight[j] += ((triangleWidth - (j - startJ)) * triangleDiff);
+        }
+      }
+    }
+    if (triangleWidth >= 20) {
+      int triangleWidth1 = (int) (triangleWidth / 2);
+      int triangleWidth2 = (int) (triangleWidth - triangleWidth1);
+      double height1 = Math.abs(skyHeight[startJ] - skyHeight[startJ + triangleWidth1 - 1]);
+      double height2 =
+          Math.abs(skyHeight[startJ + triangleWidth1] - skyHeight[startJ + triangleWidth2 - 1]);
+      if (height1 < 0.5) {
+        height1 = height;
+      }
+      if (height2 < 0.5) {
+        height2 = height;
+      }
+      triangulate(skyHeight, random, startJ, height1, triangleWidth1);
+      triangulate(skyHeight, random, startJ + triangleWidth1, height2, triangleWidth2);
+    }
   }
 
   private boolean keepRunning = true;

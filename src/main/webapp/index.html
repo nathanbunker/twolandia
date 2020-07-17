@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+	font-family: "Lato", sans-serif
+}
+
+.mySlides {
+	display: none
+}
+</style>
+<body>
+
+	<!-- Navbar -->
+	<div class="w3-top">
+		<div class="w3-bar w3-black w3-card">
+			<a
+				class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
+				href="javascript:void(0)" onclick="myFunction()"
+				title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> <a
+				href="index.html" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+			<a href="#team"
+				class="w3-bar-item w3-button w3-padding-large w3-hide-small">STAFF</a>
+			<a href="#experiences"
+				class="w3-bar-item w3-button w3-padding-large w3-hide-small">EXPERIENCES</a>
+			<a href="#safety"
+				class="w3-bar-item w3-button w3-padding-large w3-hide-small">SAFETY</a>
+			<div class="w3-dropdown-hover w3-hide-small">
+				<button class="w3-padding-large w3-button" title="More">
+					MORE <i class="fa fa-caret-down"></i>
+				</button>
+				<div class="w3-dropdown-content w3-bar-block w3-card-4">
+					<a href="#" class="w3-bar-item w3-button">Merchandise</a> <a
+						href="#" class="w3-bar-item w3-button">Extras</a> <a href="#"
+						class="w3-bar-item w3-button">Media</a>
+				</div>
+			</div>
+			<a href="javascript:void(0)"
+				class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i
+				class="fa fa-search"></i></a>
+		</div>
+	</div>
+
+	<!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+	<div id="navDemo"
+		class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top"
+		style="margin-top: 46px">
+		<a href="#band" class="w3-bar-item w3-button w3-padding-large"
+			onclick="myFunction()">BAND</a> <a href="#tour"
+			class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">TOUR</a>
+		<a href="#contact" class="w3-bar-item w3-button w3-padding-large"
+			onclick="myFunction()">CONTACT</a> <a href="#"
+			class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MERCH</a>
+	</div>
+
+	<!-- Page content -->
+	<div class="w3-content" style="max-width: 2000px; margin-top: 46px">
+
+		<!-- Automatic Slideshow Images -->
+		<div class="mySlides w3-display-container w3-center">
+			<img src="images/View from Snake Head.jpg" style="width: 100%">
+			<div
+				class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
+				<h3>The Mesas</h3>
+				<p>
+					<b>The weather is cooler up here</b>
+				</p>
+			</div>
+		</div>
+		<div class="mySlides w3-display-container w3-center">
+			<img src="images/Shadows.jpg" style="width: 100%">
+			<div
+				class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
+				<h3>Sunset Shadows</h3>
+				<p>
+					<b>The sunset leaves only shadows and brilliant memories</b>
+				</p>
+			</div>
+		</div>
+		<div class="mySlides w3-display-container w3-center">
+			<img src="images/Amazing Sunset.jpg"
+				style="width: 100%">
+			<div
+				class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
+				<h3>Zion</h3>
+				<p>
+					<b>Say goodbye to another beautiful day</b>
+				</p>
+			</div>
+		</div>
+
+		<!-- The Band Section -->
+		<div class="w3-container w3-content w3-center w3-padding-64"
+			style="max-width: 800px" id="team">
+			<h2 class="w3-wide">Find the Beauty</h2>
+			<p class="w3-opacity">
+				<i>If you are looking, you can find it everywhere</i>
+			</p>
+			<p class="w3-justify">Take time to slow down and see what
+				surrounds you. Many visitors come to Zion to see the beauty of
+				nature. But that beauty is not just something that you visit, it is
+				everywhere around you. We want you to see more than the serenity and
+				majesty of the red rocks, we want you to be able to see the beauty
+				wherever you may go in the future. We often take for granted what we
+				already have and don't appreciate the beauty in nature and the
+				goodness of those who surround us every day.</p>
+			<div class="w3-row w3-padding-32">
+				<div class="w3-third">
+					<p>Nathan Bunker</p>
+					<img src="images/Staff_Nathan1.jpg"
+						class="w3-round w3-margin-bottom" alt="Nathan Bunker"
+						style="width: 60%">
+				</div>
+				<div class="w3-third">
+					<p>Sarah Bunker</p>
+					<img src="images/Staff_Sarah2.jpg"
+						class="w3-round w3-margin-bottom" alt="Sarah Bunker"
+						style="width: 60%">
+				</div>
+				<div class="w3-third">
+					<p>Amos Bunker</p>
+					<img src="images/Staff_Amos1.jpg" class="w3-round"
+						alt="Amos Bunker" style="width: 60%">
+				</div>
+			</div>
+		</div>
+
+		<!-- The Tour Section -->
+		<div class="w3-black" id="experiences">
+			<div class="w3-container w3-content w3-padding-64"
+				style="max-width: 800px">
+				<h2 class="w3-wide w3-center">Experience Zion</h2>
+				<p class="w3-opacity w3-center">
+					<i>Small groups and limited dates, so book early!</i>
+				</p>
+				<br>
+
+				<div class="w3-row-padding w3-padding-32" style="margin: 0 -16px">
+					<div class="w3-third w3-margin-bottom">
+						<img src="/images/newyork.jpg" alt="New York" style="width: 100%"
+							class="w3-hover-opacity">
+						<div class="w3-container w3-white">
+							<p>
+								<b>Sunset and Dinner</b>
+							</p>
+							<p class="w3-opacity">Most Popular</p>
+							<p>Watch the sunset on Zion while you enjoy a fajita dinner
+								cooked just for you.</p>
+							<form
+								action="https://www.airbnb.com/experiences/588134?s=67&shared_item_type=2&virality_entry_point=2&sharer_id=460946">
+								<input type="submit" class="w3-button w3-black w3-margin-bottom"
+									value="Book on Airbnb">
+								</button>
+							</form>
+						</div>
+					</div>
+					<div class="w3-third w3-margin-bottom">
+						<img src="/images/paris.jpg" alt="Paris" style="width: 100%"
+							class="w3-hover-opacity">
+						<div class="w3-container w3-white">
+							<p>
+								<b>Sunrise and Breakfast</b>
+							</p>
+							<p class="w3-opacity">Beat the Heat</p>
+							<p>Get up with the early birds to watch the sunrise over
+								Zion.</p>
+							<form
+								action="https://www.airbnb.com/experiences/859851?s=67&shared_item_type=2&virality_entry_point=2&sharer_id=460946">
+								<input type="submit" class="w3-button w3-black w3-margin-bottom"
+									value="Book on Airbnb">
+								</button>
+							</form>
+						</div>
+					</div>
+					<div class="w3-third w3-margin-bottom">
+						<img src="/images/sanfran.jpg" alt="San Francisco"
+							style="width: 100%" class="w3-hover-opacity">
+						<div class="w3-container w3-white">
+							<p>
+								<b>Canyon Picnic</b>
+							</p>
+							<p class="w3-opacity">Escape the Crowds</p>
+							<p>Choose between a 4x4 drive or a hike to a secluded canyon
+								for a relaxing picnic lunch.</p>
+							<form
+								action="https://www.airbnb.com/experiences/859851?s=67&shared_item_type=2&virality_entry_point=2&sharer_id=460946">
+								<input type="submit" class="w3-button w3-black w3-margin-bottom"
+									value="Book on Airbnb">
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- The Contact Section -->
+		<div class="w3-container w3-content w3-padding-64"
+			style="max-width: 800px" id="safety">
+
+
+			<h2 class="w3-wide w3-center">Safety Instructions</h2>
+			<p class="w3-opacity w3-center">
+				<i>Bunker Family Tours 2019</i>
+			</p>
+			<p class="w3-justify">Exploring the deserts of the southwest can
+				be a very safe activity if some general rules are followed. Here is
+				a quick description of the potential dangers you will face and how
+				to manage them.</p>
+			<h3>Heat and Sun</h3>
+			<p class="w3-justify">If you haven’t already noticed, it’s hot
+				here! But what you may not know is that the primary source of the
+				heat is the strong sunlight that shines all day, the air itself is
+				relatively cool. Your first step in keeping cool is to find ways to
+				keep the sun off your skin. It seems counter-intuitive, but you will
+				stay cooler in a long-sleeve cotton shirt than a tank-top. We have
+				seen many tourists miserably burning in the sun because they thought
+				this would keep them cool.</p>
+			<p class="w3-justify">The second need will be to drink a lot of
+				water and to eat food that contains salts. (If you drink too much
+				water but not enough salt you can cause serious medical problems for
+				you!) You should always have at least one liter of water with you
+				and carry additional water in your car. Another good idea is to
+				carry a cheap spray bottle with water to squirt yourself, and to
+				take breaks to get wet in streams or other water.</p>
+			<h3>Rocks and Terrain</h3>
+			<p class="w3-justify">Now that you are keeping cool, you need to
+				watch where you are putting your feet! The canyons and mountains in
+				this area are actively eroding away. A large rock may look stable
+				but could shift when you step on it. Cliffs may look safe but may be
+				unstable at the edge. You are responsible for watching where you go
+				and not putting yourself in dangerous places!</p>
+			<p class="w3-justify">We can’t tell you what you may or may not
+				be able to manage, and your physical fitness level is not the same
+				as having skill for these situations. We have seen marathon runners
+				who struggle with balancing on rocks while an average looking
+				60-year-old walks through the same area without any thought. You
+				will need to be aware and be willing to ask for help if you don’t
+				know how to navigate a particular area.</p>
+			<p class="w3-justify">If you have children, it is your
+				responsibility to know their limitations and capabilities. Small
+				children will need to have their hands held by an adult in certain
+				areas.</p>
+			<h3>Cactus and Plants</h3>
+			<p class="w3-justify">You will need to watch where you place your
+				feet, mostly because you need to try and not trample on the natural
+				vegetation. (You need to give plants a chance to grow!) But you
+				could also step into a cactus and get some thorns in you. There is
+				not a lot cactus, but you will need to watch each step you take.</p>
+			<h3>Snakes and Spiders</h3>
+			<p class="w3-justify">Snakes come out when the weather gets
+				cooler, especially during the evenings of summer days. The first
+				thing you must understand is that snakes do not want to see you and
+				so will try to hide if they hear you. But you should keep your eye
+				out, especially if walking by yourself or up front. If you see a
+				snake, just give it space and don’t bother it. As for spiders and
+				insects as long as you are not sticking your fingers under rocks or
+				into holes you should not have a problem with them.</p>
+		</div>
+
+		<!-- End Page Content -->
+	</div>
+
+	<!-- Image of location/map -->
+	<img src="images/View of Cave Valley.jpg"
+		class="w3-image w3-greyscale-min" style="width: 100%">
+
+	<!-- Footer -->
+	<footer
+		class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+		<i class="fa fa-facebook-official w3-hover-opacity"></i> <i
+			class="fa fa-instagram w3-hover-opacity"></i> <i
+			class="fa fa-snapchat w3-hover-opacity"></i> <i
+			class="fa fa-pinterest-p w3-hover-opacity"></i> <i
+			class="fa fa-twitter w3-hover-opacity"></i> <i
+			class="fa fa-linkedin w3-hover-opacity"></i>
+		<p class="w3-medium">
+			Powered by <a href="https://www.w3schools.com/w3css/default.asp"
+				target="_blank">w3.css</a>
+		</p>
+	</footer>
+
+	<script>
+		// Automatic Slideshow - change image every 4 seconds
+		var myIndex = 0;
+		carousel();
+
+		function carousel() {
+			var i;
+			var x = document.getElementsByClassName("mySlides");
+			for (i = 0; i < x.length; i++) {
+				x[i].style.display = "none";
+			}
+			myIndex++;
+			if (myIndex > x.length) {
+				myIndex = 1
+			}
+			x[myIndex - 1].style.display = "block";
+			setTimeout(carousel, 4000);
+		}
+
+		// Used to toggle the menu on small screens when clicking on the menu button
+		function myFunction() {
+			var x = document.getElementById("navDemo");
+			if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+			} else {
+				x.className = x.className.replace(" w3-show", "");
+			}
+		}
+	</script>
+
+</body>
+</html>

@@ -18,7 +18,7 @@ var messageToPlayer = {
 
 var drawMessage = function() {
 	if (messageToPlayer.ttl > 0) {
-		processing.text(messageToPlayer.text, 7, 12);
+		text(messageToPlayer.text, 7, 12);
 		messageToPlayer.ttl--;
 	}
 }
@@ -91,138 +91,138 @@ for (visibleY = 0; visibleY < field.length; visibleY++ ) {
 var drawBlock = function(blockId, x, y) {
 	switch (blockId) {
 	case BLOCK_AIR:
-		processing.stroke(72, 255, 255);
-		processing.fill(102, 255, 255);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+		stroke(72, 255, 255);
+		fill(102, 255, 255);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
 		break;
 	case BLOCK_STONE:
-		processing.stroke(157, 157, 157);
-		processing.fill(166, 166, 166); // 
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+		stroke(157, 157, 157);
+		fill(166, 166, 166); // 
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
 		break;
 	case BLOCK_DIRT:
-		processing.stroke(118, 54, 0);
-		processing.fill(128, 64, 0);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+		stroke(118, 54, 0);
+		fill(128, 64, 0);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
 		break;
 	case BLOCK_CAVE_AIR:
-		processing.noStroke();
-		processing.fill(242, 242, 242);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
+		noStroke();
+		fill(242, 242, 242);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
 		break;
 	case BLOCK_SAND:
-		processing.stroke(200, 200, 140);
-		processing.fill(255, 255, 173);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
+		stroke(200, 200, 140);
+		fill(255, 255, 173);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
 		break;
 	case BLOCK_WATER:
-		processing.noStroke();
-		processing.fill(102, 204, 255);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+		noStroke();
+		fill(102, 204, 255);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
 		break;
 	case BLOCK_GRASS:
-		processing.stroke(118, 54, 0);
-		processing.fill(128, 64, 0);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
-		processing.fill(0, 153, 51);
-		processing.stroke(0, 153, 51);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, 4);
-		processing.point(x * BLOCK_SIZE, y * BLOCK_SIZE + 5);
-		processing.point(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 5);
-		processing.point(x * BLOCK_SIZE + 5, y * BLOCK_SIZE + 5);
-		processing.point(x * BLOCK_SIZE + 8, y * BLOCK_SIZE + 5);
-		processing.point(x * BLOCK_SIZE + 10, y * BLOCK_SIZE + 5);
-		processing.point(x * BLOCK_SIZE + 11, y * BLOCK_SIZE + 5);
+		stroke(118, 54, 0);
+		fill(128, 64, 0);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+		fill(0, 153, 51);
+		stroke(0, 153, 51);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, 4);
+		point(x * BLOCK_SIZE, y * BLOCK_SIZE + 5);
+		point(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 5);
+		point(x * BLOCK_SIZE + 5, y * BLOCK_SIZE + 5);
+		point(x * BLOCK_SIZE + 8, y * BLOCK_SIZE + 5);
+		point(x * BLOCK_SIZE + 10, y * BLOCK_SIZE + 5);
+		point(x * BLOCK_SIZE + 11, y * BLOCK_SIZE + 5);
 		break;
 	case BLOCK_COAL:
-		processing.stroke(89, 89, 89);
-		processing.fill(115, 115, 115);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
-		processing.stroke(89, 89, 89);
-		processing.rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
+		stroke(89, 89, 89);
+		fill(115, 115, 115);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+		stroke(89, 89, 89);
+		rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
 		break;
 	case BLOCK_IRON:
-		processing.fill(255, 145, 0);
-		processing.stroke(255, 115, 51);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
-		processing.rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
+		fill(255, 145, 0);
+		stroke(255, 115, 51);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
+		rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
 		break;
 	case BLOCK_DIAMOND:
-		processing.stroke(0, 0, 0);
-		processing.fill(51, 204, 255);
-		processing.stroke(0, 0, 0);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
-		processing.rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
+		stroke(0, 0, 0);
+		fill(51, 204, 255);
+		stroke(0, 0, 0);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
+		rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
 		break;
 	case BLOCK_SNOW:
-		processing.noStroke();
-		processing.fill(255, 255, 255);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+		noStroke();
+		fill(255, 255, 255);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
 		break;
 	case BLOCK_ICE:
-		processing.noStroke();
-		processing.fill(0, 153, 255);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-		processing.fill(255, 255, 255);
-		processing.rect(x * BLOCK_SIZE + 1, y * BLOCK_SIZE + 2, 9, 1);
+		noStroke();
+		fill(0, 153, 255);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+		fill(255, 255, 255);
+		rect(x * BLOCK_SIZE + 1, y * BLOCK_SIZE + 2, 9, 1);
 		break;
 	case BLOCK_WOOD:
-		processing.noStroke();
-		processing.fill(77, 38, 0);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-		processing.fill(51, 26, 0);
-		processing.rect(x * BLOCK_SIZE + 2, y * BLOCK_SIZE + 2, 2, 6);
-		processing.rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 4, 2, 6);
-		processing.fill(102, 53, 0);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 2, 10);
-		processing.rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 10, 4, 2);
-		processing.rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 2, 2, 2);
-		processing.rect(x * BLOCK_SIZE + 4, y * BLOCK_SIZE + 6, 2, 2);
-		processing.fill(51, 26, 0);
-		processing.rect(x * BLOCK_SIZE + 8, y * BLOCK_SIZE + 6, 2, 2);
-		processing.rect(x * BLOCK_SIZE + 10, y * BLOCK_SIZE, 2, 4);
-		processing.fill(115, 77, 38);
-		processing.rect(x * BLOCK_SIZE + 4, y * BLOCK_SIZE, 2, 6);
-		processing.rect(x * BLOCK_SIZE + 10, y * BLOCK_SIZE + 4, 2, 6);
+		noStroke();
+		fill(77, 38, 0);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+		fill(51, 26, 0);
+		rect(x * BLOCK_SIZE + 2, y * BLOCK_SIZE + 2, 2, 6);
+		rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 4, 2, 6);
+		fill(102, 53, 0);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 2, 10);
+		rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 10, 4, 2);
+		rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 2, 2, 2);
+		rect(x * BLOCK_SIZE + 4, y * BLOCK_SIZE + 6, 2, 2);
+		fill(51, 26, 0);
+		rect(x * BLOCK_SIZE + 8, y * BLOCK_SIZE + 6, 2, 2);
+		rect(x * BLOCK_SIZE + 10, y * BLOCK_SIZE, 2, 4);
+		fill(115, 77, 38);
+		rect(x * BLOCK_SIZE + 4, y * BLOCK_SIZE, 2, 6);
+		rect(x * BLOCK_SIZE + 10, y * BLOCK_SIZE + 4, 2, 6);
 		break;
 	case BLOCK_LEAVES:
-		processing.stroke(0, 102, 0);
-		processing.fill(0, 153, 51);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
+		stroke(0, 102, 0);
+		fill(0, 153, 51);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
 		break;
 	case BLOCK_AMETHYST:
-		processing.fill(204, 0, 204);
-		processing.stroke(0, 0, 0);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
-		processing.rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
+		fill(204, 0, 204);
+		stroke(0, 0, 0);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
+		rect(x * BLOCK_SIZE + 3, y * BLOCK_SIZE + 3, 5, 5);
 		break;
 	case BLOCK_FLAMES:
-		processing.stroke(255, 255, 255);
-		processing.fill(255, 255, 255);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
-		processing.fill(255, 102, 0);
-		processing.noStroke();
-		processing.rect(x * BLOCK_SIZE + 2, y * BLOCK_SIZE + 10, 10, 2);
-		processing.rect(x * BLOCK_SIZE + 2, y * BLOCK_SIZE + 6, 6, 2);
-		processing.rect(x * BLOCK_SIZE + 8, y * BLOCK_SIZE + 8, 2, 2);
-		processing.fill(255, 153, 0);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE + 8, 6, 2);
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE + 8, 6, 2);
-		processing.fill(255, 255, 255);
-		processing.rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 8, 2, 4);
-		processing.fill(255, 204, 0);
-		processing.rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 8, 2, 2);
-		processing.rect(x * BLOCK_SIZE + 2, y * BLOCK_SIZE + 6, 2, 2);
-		processing.rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 2, 2, 2);
-		processing.fill(204, 51, 0);
-		processing.rect(x * BLOCK_SIZE + 4, y * BLOCK_SIZE + 4, 2, 2);
-		processing.rect(x * BLOCK_SIZE + 10, y * BLOCK_SIZE + 10, 2, 2);
+		stroke(255, 255, 255);
+		fill(255, 255, 255);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+		fill(255, 102, 0);
+		noStroke();
+		rect(x * BLOCK_SIZE + 2, y * BLOCK_SIZE + 10, 10, 2);
+		rect(x * BLOCK_SIZE + 2, y * BLOCK_SIZE + 6, 6, 2);
+		rect(x * BLOCK_SIZE + 8, y * BLOCK_SIZE + 8, 2, 2);
+		fill(255, 153, 0);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE + 8, 6, 2);
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE + 8, 6, 2);
+		fill(255, 255, 255);
+		rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 8, 2, 4);
+		fill(255, 204, 0);
+		rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 8, 2, 2);
+		rect(x * BLOCK_SIZE + 2, y * BLOCK_SIZE + 6, 2, 2);
+		rect(x * BLOCK_SIZE + 6, y * BLOCK_SIZE + 2, 2, 2);
+		fill(204, 51, 0);
+		rect(x * BLOCK_SIZE + 4, y * BLOCK_SIZE + 4, 2, 2);
+		rect(x * BLOCK_SIZE + 10, y * BLOCK_SIZE + 10, 2, 2);
 		
 		break;
 	default:
-		processing.stroke(0, 0, 0);
-		processing.fill(0, 0, 0); 
-		processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
+		stroke(0, 0, 0);
+		fill(0, 0, 0); 
+		rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 11, 11);
 	}
 
 }
@@ -233,9 +233,9 @@ var drawField = function() {
 				drawBlock(field[y][x], x, y);
 			}
 			else {
-				processing.noStroke();
-				processing.fill(200, 200, 200); 
-				processing.rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 12, 12);
+				noStroke();
+				fill(200, 200, 200); 
+				rect(x * BLOCK_SIZE, y * BLOCK_SIZE, 12, 12);
 			}
 		}
 	}
@@ -249,20 +249,20 @@ var drawPlayer = function(p) {
 	}
 	
 	
-	processing.stroke(0, 0, 0);
-	processing.strokeWeight(1);
-	processing.fill(255, 145, 0); // orange for the body
-	processing.rect(p.x, p.y, 6, -6);// body
-	processing.fill(235, 202, 132); // tan 
-	processing.rect(p.x, p.y - 6, 6, -4); // head
-	processing.stroke(102, 51, 0);
-	processing.line(p.x + 1, p.y - 3, p.x + 5, p.y - 3);// belt
-	processing.stroke(77, 77, 77);
-	processing.point(p.x + 2, p.y - 2);
-	processing.stroke(102, 102, 153);
-	processing.point(p.x + 5, p.y - 2);
+	stroke(0, 0, 0);
+	strokeWeight(1);
+	fill(255, 145, 0); // orange for the body
+	rect(p.x, p.y, 6, -6);// body
+	fill(235, 202, 132); // tan 
+	rect(p.x, p.y - 6, 6, -4); // head
+	stroke(102, 51, 0);
+	line(p.x + 1, p.y - 3, p.x + 5, p.y - 3);// belt
+	stroke(77, 77, 77);
+	point(p.x + 2, p.y - 2);
+	stroke(102, 102, 153);
+	point(p.x + 5, p.y - 2);
 	// arms
-	processing.stroke(0, 0, 0);
+	stroke(0, 0, 0);
 	
 	if (p.rest > 0) {
 		p.rest--;
@@ -274,30 +274,30 @@ var drawPlayer = function(p) {
 	if (p.holdingBlock == 0) {
 		if (p.lookingRight < 0) 
 			{
-			processing.line(p.x + 5 , p.y - 2, p.x + 5, p.y - 6); // right arm
+			line(p.x + 5 , p.y - 2, p.x + 5, p.y - 6); // right arm
 			}
 		else if (p.lookingRight > 0)			{
-			processing.line(p.x + 1 , p.y - 2, p.x + 1, p.y - 6); // left arm
+			line(p.x + 1 , p.y - 2, p.x + 1, p.y - 6); // left arm
 			}
 		else {
-			processing.line(p.x - 1 , p.y - 2, p.x - 1, p.y - 6); // left arm
-			processing.line(p.x + 7 , p.y - 2, p.x + 7, p.y - 6); // right arm
+			line(p.x - 1 , p.y - 2, p.x - 1, p.y - 6); // left arm
+			line(p.x + 7 , p.y - 2, p.x + 7, p.y - 6); // right arm
 		}
 		
 	} else {
-		processing.line(p.x - 1 , p.y - 5, p.x - 1, p.y - 12); // left arm
-		processing.line(p.x + 7 , p.y - 5, p.x + 7, p.y - 12); // right arm
+		line(p.x - 1 , p.y - 5, p.x - 1, p.y - 12); // left arm
+		line(p.x + 7 , p.y - 5, p.x + 7, p.y - 12); // right arm
 		drawBlock(p.holdingBlock, (p.x - 3) / 12, (p.y - 24) / 12);
 	}
 
-	processing.fill(0, 0, 0);
-	processing.stroke(0, 0, 0);
-	processing.point(p.x + 2 + p.lookingRight, p.y - 8 + p.lookingDown);
-	processing.point(p.x + 4 + p.lookingRight, p.y - 8 + p.lookingDown);
+	fill(0, 0, 0);
+	stroke(0, 0, 0);
+	point(p.x + 2 + p.lookingRight, p.y - 8 + p.lookingDown);
+	point(p.x + 4 + p.lookingRight, p.y - 8 + p.lookingDown);
 };
 
 var movePlayer = function(k) {
-	if (processing.keyCode === processing.RIGHT) {
+	if (keyCode === RIGHT) {
 		player.x += 2.0;
 		var fieldX = Math.floor((player.x + 7) / BLOCK_SIZE);
 		var fieldY = Math.floor((player.y - 5) / BLOCK_SIZE);
@@ -308,7 +308,7 @@ var movePlayer = function(k) {
 				field[fieldY][fieldX] != BLOCK_LEAVES) {
 			player.x = fieldX * BLOCK_SIZE - 7;
 		}
-	} else if (processing.keyCode === processing.LEFT) {
+	} else if (keyCode === LEFT) {
 		player.x -= 2.0;
 		var fieldX = Math.floor((player.x + 0) / BLOCK_SIZE);
 		var fieldY = Math.floor((player.y - 5) / BLOCK_SIZE);
@@ -320,14 +320,14 @@ var movePlayer = function(k) {
 			player.x = fieldX * (BLOCK_SIZE + 1);
 		}
 		
-	} else if (processing.keyCode === processing.UP) {
+	} else if (keyCode === UP) {
 		player.y -= 2.0;
 		if (player.y < 1) {
 			player.y = 1;
 		}
 
 	
-	} else if (processing.keyCode === processing.DOWN) {
+	} else if (keyCode === DOWN) {
 		var fieldX = Math.floor((player.x + 0) / BLOCK_SIZE);
 		var fieldY = Math.floor((player.y + 1) / BLOCK_SIZE);
 		if (field[fieldY][fieldX] == BLOCK_WATER ||
@@ -335,7 +335,7 @@ var movePlayer = function(k) {
 				field[fieldY][fieldX] == BLOCK_LEAVES) {
 			player.y += 2.0;
 		}
-	} else if (processing.key == 32) {
+	} else if (key == 32) {
 		if (player.jump == 0 && player.y > 40) {
 			player.jump = 32;//32
 		}
@@ -521,22 +521,22 @@ var playerDigs = function(p, k) {
 
 
 
-processing.keyPressed = function() {
+void keyPressed() {
 	movePlayer();
-	var k = processing.key;
-	if (processing.keyCode === processing.RIGHT) {
+	var k = key;
+	if (keyCode === RIGHT) {
 		player.lookingRight = 1;
 		player.lookingDown = 0;
 		player.rest = 4 * 60;
-	} else if (processing.keyCode === processing.LEFT) {
+	} else if (keyCode === LEFT) {
 		player.lookingRight = -1;
 		player.lookingDown = 0;
 		player.rest = 4 * 60;
-	} else if (processing.keyCode === processing.UP) {
+	} else if (keyCode === UP) {
 		player.lookingRight = 0;
 		player.lookingDown = -1;
 		player.rest = 4 * 60;
-	} else if (processing.keyCode === processing.DOWN) {
+	} else if (keyCode === DOWN) {
 		player.lookingRight = 0;
 		player.lookingDown = 1;
 		player.rest = 4 * 60;
@@ -556,17 +556,9 @@ processing.keyPressed = function() {
 	}
 }
 
-processing.mousePressed = function() {
-
-}
-
-processing.mouseReleased = function() {
-
-}
-
-processing.draw = function() {
+draw = function() {
 	fallPlayer(player);
-	processing.background(255, 255, 255);
+	background(255, 255, 255);
 	drawField();
 	drawPlayer(player);
 	drawMessage();

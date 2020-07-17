@@ -20,7 +20,7 @@ public class MinerServlet extends HttpServlet {
     return worldMinder;
   }
 
-  private static void setup() {
+  private synchronized static void setup() {
     if (worldMinder == null) {
       worldMinder = new WorldMinder();
       worldMinder.start();
