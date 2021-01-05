@@ -1,4 +1,20 @@
 
+function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+    this.sound.play();
+  }
+  this.stop = function(){
+    this.sound.pause();
+  }
+}
+
+var mySound = new sound("bounce.mp3");
 var time = 0;
 
 var toplazer = function(t,x) {
@@ -16,6 +32,8 @@ var toplazer = function(t,x) {
     rect(x,0,70,659);
 };
 
+var playSound = false;
+
 draw = function() {
     background(255, 255, 255);
     
@@ -29,12 +47,20 @@ draw = function() {
     fill(255,0,0);
     //text(playerName,3,20);
     text(time,3,40);
+
+
     
     if(mouseButton === LEFT) {
         time += 0.01;
+        playSound = true;
     }
     if(mouseButton === RIGHT) {
         time = 0;
+        playSound = false;
     }
 
+    if (playSound)
+    {
+       mySound.play();	
+    }
 };
